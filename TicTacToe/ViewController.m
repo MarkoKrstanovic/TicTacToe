@@ -75,7 +75,7 @@ int turn_count;
     self.button7.enabled = YES;
     self.button8.enabled = YES;
     self.button9.enabled = YES;
-    
+    NSLog(@"ovo je nova igra");
 }
 
 
