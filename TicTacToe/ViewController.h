@@ -19,6 +19,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *button8;
 @property (weak, nonatomic) IBOutlet UIButton *button9;
 @property (weak, nonatomic) IBOutlet UILabel *winnerLabel;
+@property (weak, nonatomic) IBOutlet UILabel *xScoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *oScoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tieScoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *whoPlaysLabel;
 - (IBAction)buttonClicked:(id)sender;
 - (IBAction)startNewGame:(id)sender;
 
