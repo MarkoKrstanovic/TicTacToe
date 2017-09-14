@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *oScoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tieScoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *whoPlaysLabel;
+@property (weak, nonatomic) IBOutlet UILabel *leadershipLabel;
 - (IBAction)buttonClicked:(id)sender;
 - (IBAction)startNewGame:(id)sender;
 

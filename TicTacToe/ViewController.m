@@ -66,6 +66,13 @@ int turn_count;
     [self enableButtons];
     self.whoPlaysLabel.text = @"X";
     
+    if (x>o) {
+        self.leadershipLabel.text = @"X is on fire";
+    } else if (x<o) {
+        self.leadershipLabel.text = @"O is kicking some ass";
+    } else if (x==o) {
+        self.leadershipLabel.text = @"Score is tied";
+    }
 }
 
 
