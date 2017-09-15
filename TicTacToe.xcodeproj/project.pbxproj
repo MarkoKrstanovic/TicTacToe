@@ -13,6 +13,7 @@
 		5B25E27F1F690BA600D1B920 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B25E27D1F690BA600D1B920 /* Main.storyboard */; };
 		5B25E2811F690BA600D1B920 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B25E2801F690BA600D1B920 /* Assets.xcassets */; };
 		5B25E2841F690BA600D1B920 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B25E2821F690BA600D1B920 /* LaunchScreen.storyboard */; };
+		5B25E2DC1F6A855900D1B920 /* CustomBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B25E2DB1F6A855900D1B920 /* CustomBackground.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		5B25E2801F690BA600D1B920 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B25E2831F690BA600D1B920 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B25E2851F690BA600D1B920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B25E2DA1F6A855900D1B920 /* CustomBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBackground.h; sourceTree = "<group>"; };
+		5B25E2DB1F6A855900D1B920 /* CustomBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBackground.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,8 @@
 				5B25E2781F690BA600D1B920 /* AppDelegate.m */,
 				5B25E27A1F690BA600D1B920 /* ViewController.h */,
 				5B25E27B1F690BA600D1B920 /* ViewController.m */,
+				5B25E2DA1F6A855900D1B920 /* CustomBackground.h */,
+				5B25E2DB1F6A855900D1B920 /* CustomBackground.m */,
 				5B25E27D1F690BA600D1B920 /* Main.storyboard */,
 				5B25E2801F690BA600D1B920 /* Assets.xcassets */,
 				5B25E2821F690BA600D1B920 /* LaunchScreen.storyboard */,
@@ -151,6 +156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B25E2DC1F6A855900D1B920 /* CustomBackground.m in Sources */,
 				5B25E27C1F690BA600D1B920 /* ViewController.m in Sources */,
 				5B25E2791F690BA600D1B920 /* AppDelegate.m in Sources */,
 				5B25E2761F690BA600D1B920 /* main.m in Sources */,
