@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Xview.h"
+#import "OView.h"
 
 @interface CustomBackground : UIView
 @property (strong, nonatomic) Xview* xview;
+@property (strong, nonatomic) OView* oview;
 @end
