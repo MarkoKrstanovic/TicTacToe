@@ -9,13 +9,10 @@
 #import "CustomBackground.h"
 
 @implementation CustomBackground
-
-
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     // Drawing code
-    
     UIColor *blackColor = [UIColor blackColor];
     CGContextRef context = UIGraphicsGetCurrentContext();
     UIColor * whiteColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
@@ -32,7 +29,7 @@
     CGContextAddLineToPoint(context, 500, 280);
     CGContextSetStrokeColorWithColor(context, blackColor.CGColor);
     CGContextStrokePath(context);
-    
+    turn = YES;
     [self addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addX1:)]];
 
 }
@@ -48,78 +45,122 @@
     CGRect seventh = CGRectMake(0, 280, 140, 140);
     CGRect eight = CGRectMake(140, 280, 140, 140);
     CGRect nineth = CGRectMake(280, 280, 140, 140);
-
+    
     if(CGRectContainsPoint(first, p)){
-//        self.xview = [[Xview alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-//        self.xview.backgroundColor = [UIColor clearColor];
-//        [self addSubview:self.xview];
-        
-        self.oview = [[OView alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-        self.oview.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.oview];
-        
+        if (turn){
+            self.xview = [[Xview alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
+            self.xview.backgroundColor = [UIColor clearColor];
+            [self addSubview:self.xview];
+        } else {
+                self.oview = [[OView alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
+                self.oview.backgroundColor = [UIColor clearColor];
+                [self addSubview:self.oview];
+          }
+    
     } else if (CGRectContainsPoint(second, p)) {
-        self.xview = [[Xview alloc]initWithFrame:CGRectMake(140, 0, 140, 140)];
-        self.xview.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.xview];
-        
+        if (turn) {
+            self.xview = [[Xview alloc]initWithFrame:CGRectMake(140, 0, 140, 140)];
+            self.xview.backgroundColor = [UIColor clearColor];
+            [self addSubview:self.xview];
+        } else {
+            self.oview = [[OView alloc]initWithFrame:CGRectMake(140, 0, 140, 140)];
+            self.oview.backgroundColor = [UIColor clearColor];
+            [self addSubview:self.oview];
+        }
+       
     } else if (CGRectContainsPoint(third, p)) {
-        self.xview = [[Xview alloc]initWithFrame:CGRectMake(280, 0, 140, 140)];
-        self.xview.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.xview];
-        
+        if(turn) {
+            self.xview = [[Xview alloc]initWithFrame:CGRectMake(280, 0, 140, 140)];
+            self.xview.backgroundColor = [UIColor clearColor];
+            [self addSubview:self.xview];
+        } else {
+            self.oview = [[OView alloc]initWithFrame:CGRectMake(280, 0, 140, 140)];
+            self.oview.backgroundColor = [UIColor clearColor];
+            [self addSubview:self.oview];
+        }
+      
     } else if (CGRectContainsPoint(fourth, p)) {
-        self.xview = [[Xview alloc]initWithFrame:CGRectMake(0, 140, 140, 140)];
-        self.xview.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.xview];
+        if(turn) {
+            self.xview = [[Xview alloc]initWithFrame:CGRectMake(0, 140, 140, 140)];
+            self.xview.backgroundColor = [UIColor clearColor];
+            [self addSubview:self.xview];
+        } else {
+            self.oview = [[OView alloc]initWithFrame:CGRectMake(0, 140, 140, 140)];
+            self.oview.backgroundColor = [UIColor clearColor];
+            [self addSubview:self.oview];
+        }
         
     } else if (CGRectContainsPoint(fifth, p)) {
-        self.xview = [[Xview alloc]initWithFrame:CGRectMake(140, 140, 140, 140)];
-        self.xview.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.xview];
+        if(turn) {
+            self.xview = [[Xview alloc]initWithFrame:CGRectMake(140, 140, 140, 140)];
+            self.xview.backgroundColor = [UIColor clearColor];
+            [self addSubview:self.xview];
+        } else {
+            self.oview = [[OView alloc]initWithFrame:CGRectMake(140, 140, 140, 140)];
+            self.oview.backgroundColor = [UIColor clearColor];
+            [self addSubview:self.oview];
+        }
         
     } else if (CGRectContainsPoint(sixth, p)) {
-        self.xview = [[Xview alloc]initWithFrame:CGRectMake(280, 140, 140, 140)];
-        self.xview.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.xview];
-        
+        if(turn) {
+            self.xview = [[Xview alloc]initWithFrame:CGRectMake(280, 140, 140, 140)];
+            self.xview.backgroundColor = [UIColor clearColor];
+            [self addSubview:self.xview];
+        } else {
+            self.oview = [[OView alloc]initWithFrame:CGRectMake(280, 140, 140, 140)];
+            self.oview.backgroundColor = [UIColor clearColor];
+            [self addSubview:self.oview];
+        }
+       
     } else if (CGRectContainsPoint(seventh, p)) {
-        self.xview = [[Xview alloc]initWithFrame:CGRectMake(0, 280, 140, 140)];
-        self.xview.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.xview];
-        
+        if(turn) {
+            self.xview = [[Xview alloc]initWithFrame:CGRectMake(0, 280, 140, 140)];
+            self.xview.backgroundColor = [UIColor clearColor];
+            [self addSubview:self.xview];
+        } else {
+            self.oview = [[OView alloc]initWithFrame:CGRectMake(0, 280, 140, 140)];
+            self.oview.backgroundColor = [UIColor clearColor];
+            [self addSubview:self.oview];
+        }
+       
     } else if (CGRectContainsPoint(eight, p)) {
-        self.xview = [[Xview alloc]initWithFrame:CGRectMake(140, 280, 140, 140)];
-        self.xview.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.xview];
+        if(turn) {
+            self.xview = [[Xview alloc]initWithFrame:CGRectMake(140, 280, 140, 140)];
+            self.xview.backgroundColor = [UIColor clearColor];
+            [self addSubview:self.xview];
+        } else {
+            self.oview = [[OView alloc]initWithFrame:CGRectMake(140, 280, 140, 140)];
+            self.oview.backgroundColor = [UIColor clearColor];
+            [self addSubview:self.oview];
+        }
         
     } else if (CGRectContainsPoint(nineth, p)) {
-        self.xview = [[Xview alloc]initWithFrame:CGRectMake(280, 280, 140, 140)];
-        self.xview.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.xview];
-        
+        if(turn) {
+            self.xview = [[Xview alloc]initWithFrame:CGRectMake(280, 280, 140, 140)];
+            self.xview.backgroundColor = [UIColor clearColor];
+            [self addSubview:self.xview];
+        } else {
+            self.oview = [[OView alloc]initWithFrame:CGRectMake(280, 280, 140, 140)];
+            self.oview.backgroundColor = [UIColor clearColor];
+            [self addSubview:self.oview];
+        }
     }
-    
+    turn = !turn;
 }
  // background Gradinet
 void drawLinearGradient(CGContextRef context, CGRect rect, CGColorRef startColor, CGColorRef endColor)
 {
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGFloat locations[] = { 0.0, 1.0 };
-    
     NSArray *colors = @[(__bridge id) startColor, (__bridge id) endColor];
-    
     CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef) colors, locations);
-    
     CGPoint startPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect));
     CGPoint endPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect));
-    
     CGContextSaveGState(context);
     CGContextAddRect(context, rect);
     CGContextClip(context);
     CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, 0);
     CGContextRestoreGState(context);
-    
     CGGradientRelease(gradient);
     CGColorSpaceRelease(colorSpace);
 }

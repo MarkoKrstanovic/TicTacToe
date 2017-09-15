@@ -10,7 +10,10 @@
 #import "Xview.h"
 #import "OView.h"
 
-@interface CustomBackground : UIView
+@interface CustomBackground : UIView{
+    bool turn;
+    int turnCount;
+}
 @property (strong, nonatomic) Xview* xview;
 @property (strong, nonatomic) OView* oview;
 @end
