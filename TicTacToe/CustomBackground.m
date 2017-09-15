@@ -36,7 +36,12 @@
     CGContextAddLineToPoint(context, 500, 280);
     CGContextSetStrokeColorWithColor(context, blackColor.CGColor);
     CGContextStrokePath(context);
-
+//    self.xview = [[Xview alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
+//    self.xview.backgroundColor = [UIColor clearColor];
+//    [self addSubview:self.xview];
+//    self.xview = [[Xview alloc]initWithFrame:CGRectMake(280, 280, 140, 140)];
+//    self.xview.backgroundColor = [UIColor clearColor];
+//    [self addSubview:self.xview];
 }
  // background Gradinet
 void drawLinearGradient(CGContextRef context, CGRect rect, CGColorRef startColor, CGColorRef endColor)

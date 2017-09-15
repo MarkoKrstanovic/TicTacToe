@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "CustomBackground.h"
+#import "Xview.h"
 @interface ViewController ()
 
 @end
@@ -21,8 +22,8 @@
     if( ![self.view isKindOfClass:[CustomBackground class]]) {
          self.view = [[CustomBackground alloc]init];
     }
-}
 
+}
 @end
 
 
