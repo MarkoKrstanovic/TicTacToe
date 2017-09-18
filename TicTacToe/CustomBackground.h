@@ -26,4 +26,6 @@
 @property (strong, nonatomic) View* regularView9;
 @property (strong, nonatomic) Xview* xview;
 @property (strong, nonatomic) OView* oview;
+@property (nonatomic) CGRect myRect;
+@property (nonatomic) CGPoint mypoint;
 @end

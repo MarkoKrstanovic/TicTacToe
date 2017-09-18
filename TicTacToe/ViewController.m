@@ -22,7 +22,6 @@
     if( ![self.view isKindOfClass:[CustomBackground class]]) {
          self.view = [[CustomBackground alloc]init];
     }
-
 }
 @end
 

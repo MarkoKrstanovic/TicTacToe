@@ -19,6 +19,8 @@
     UIColor * lightRedColor = [UIColor colorWithRed:230.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
     CGRect paperRect = self.bounds;
     drawLinearGradient(context, paperRect, whiteColor.CGColor, lightRedColor.CGColor);
+    CGContextSetLineWidth(context, 5);
+    CGContextSetLineCap(context, kCGLineCapRound);
     CGContextMoveToPoint(context, 140, 0);
     CGContextAddLineToPoint(context, 140, 420);
     CGContextMoveToPoint(context, 280, 0);
@@ -29,48 +31,53 @@
     CGContextAddLineToPoint(context, 500, 280);
     CGContextSetStrokeColorWithColor(context, blackColor.CGColor);
     CGContextStrokePath(context);
-    turn = YES;
-    turnCount=0;
-    self.regularView1 = [[View alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-    self.regularView1.backgroundColor = [UIColor clearColor];
-    [self addSubview:self.regularView1];
     
-    self.regularView2 = [[View alloc]initWithFrame:CGRectMake(140, 0, 140, 140)];
-    self.regularView2.backgroundColor = [UIColor clearColor];
-    [self addSubview:self.regularView2];
+    turn = !turn;
+    [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(add:)]];
+    if(turn) {
+        [self drawXwithContext:context];
+    } else
+        [self drawOwithContext:context];
     
-    self.regularView3 = [[View alloc]initWithFrame:CGRectMake(280, 0, 140, 140)];
-    self.regularView3.backgroundColor = [UIColor clearColor];
-    [self addSubview:self.regularView3];
-    
-    self.regularView4 = [[View alloc]initWithFrame:CGRectMake(0, 140, 140, 140)];
-    self.regularView4.backgroundColor = [UIColor clearColor];
-    [self addSubview:self.regularView4];
-    
-    self.regularView5 = [[View alloc]initWithFrame:CGRectMake(140, 140, 140, 140)];
-    self.regularView5.backgroundColor = [UIColor clearColor];
-    [self addSubview:self.regularView5];
-    
-    self.regularView6 = [[View alloc]initWithFrame:CGRectMake(280, 140, 140, 140)];
-    self.regularView6.backgroundColor = [UIColor clearColor];
-    [self addSubview:self.regularView6];
-    
-    self.regularView7 = [[View alloc]initWithFrame:CGRectMake(0, 280, 140, 140)];
-    self.regularView7.backgroundColor = [UIColor clearColor];
-    [self addSubview:self.regularView7];
-    
-    self.regularView8 = [[View alloc]initWithFrame:CGRectMake(140, 280, 140, 140)];
-    self.regularView8.backgroundColor = [UIColor clearColor];
-    [self addSubview:self.regularView8];
-    
-    self.regularView9 = [[View alloc]initWithFrame:CGRectMake(280, 280, 140, 140)];
-    self.regularView9.backgroundColor = [UIColor clearColor];
-    [self addSubview:self.regularView9];
-    [self addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addX1:)]];
 }
 
--(void)addX1:(UIGestureRecognizer*)tap {
-    CGPoint p =  [ tap locationInView:self];
+-(void)drawXwithContext:(CGContextRef)context {
+    
+    CGColorRef blue = [[UIColor blueColor] CGColor];
+    CGContextSetLineWidth(context, 10);
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextMoveToPoint(context, self.myRect.origin.x + 20, self.myRect.origin.y+20);
+    CGContextAddLineToPoint(context, self.myRect.origin.x+120, self.myRect.origin.y+120);
+    CGContextMoveToPoint(context, self.myRect.origin.x+120, self.myRect.origin.y+20);
+    CGContextAddLineToPoint(context, self.myRect.origin.x+20, self.myRect.origin.y+120);
+    CGContextSetStrokeColorWithColor(context, blue);
+    CGContextStrokePath(context);
+  
+}
+
+-(void)drawOwithContext:(CGContextRef)context {
+    
+    CGColorRef blue = [[UIColor blueColor] CGColor];
+    CGContextSetLineWidth(context, 10);
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextMoveToPoint(context, self.myRect.origin.x+20, self.myRect.origin.y+20);
+    CGContextAddLineToPoint(context, self.myRect.origin.x+90, self.myRect.origin.y+20);
+    CGContextAddLineToPoint(context, self.myRect.origin.x+90, self.myRect.origin.y+120);
+    CGContextAddLineToPoint(context, self.myRect.origin.x+20, self.myRect.origin.y+120);
+    CGContextAddLineToPoint(context, self.myRect.origin.x+20, self.myRect.origin.y+20);
+    CGContextSetStrokeColorWithColor(context, blue);
+    CGContextStrokePath(context);
+    
+}
+
+-(void)add:(UIGestureRecognizer*)tap {
+    
+    CGPoint p =  [tap locationInView:self];
+    NSLog(@"x=%f", p.x);
+    NSLog(@"y=%f", p.y);
+    NSLog(@"%d",turnCount);
+    self.mypoint = p;
+    
     CGRect first = CGRectMake(0, 0, 140, 140);
     CGRect second = CGRectMake(140, 0, 140, 140);
     CGRect third = CGRectMake(280, 0, 140, 140);
@@ -82,172 +89,44 @@
     CGRect nineth = CGRectMake(280, 280, 140, 140);
     
     if(CGRectContainsPoint(first, p)){
-        if (![self.regularView1 isUserInteractionEnabled]) {
-            
-        } else {
-        
-            if (turn){
-                self.xview = [[Xview alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-                self.xview.backgroundColor = [UIColor clearColor];
-                [self.regularView1 addSubview:self.xview];
-            
-            } else {
-                self.oview = [[OView alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-                self.oview.backgroundColor = [UIColor clearColor];
-                [self.regularView1 addSubview:self.oview];
-            }
-            
-            self.regularView1.userInteractionEnabled=false;
-            turn = !turn;
             turnCount++;
-        }
+            self.myRect = first;
+            [self setNeedsDisplay];
     } else if (CGRectContainsPoint(second, p)) {
-        if (![self.regularView2 isUserInteractionEnabled]) {
-            
-        } else {
-            
-            if (turn) {
-                self.xview = [[Xview alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-                self.xview.backgroundColor = [UIColor clearColor];
-                [self.regularView2 addSubview:self.xview];
-            } else {
-                self.oview = [[OView alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-                self.oview.backgroundColor = [UIColor clearColor];
-                [self.regularView2 addSubview:self.oview];
-        }
-            
-            self.regularView2.userInteractionEnabled=false;
-            turn = !turn;
             turnCount++;
-        }
+            self.myRect = second;
+            [self setNeedsDisplay];
     } else if (CGRectContainsPoint(third, p)) {
-        if (![self.regularView3 isUserInteractionEnabled]) {
-            
-        } else {
-            
-            if(turn) {
-                self.xview = [[Xview alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-                self.xview.backgroundColor = [UIColor clearColor];
-                [self.regularView3 addSubview:self.xview];
-            } else {
-                self.oview = [[OView alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-                self.oview.backgroundColor = [UIColor clearColor];
-                [self.regularView3 addSubview:self.oview];
-        }
-        self.regularView3.userInteractionEnabled=false;
-        turn = !turn;
-        turnCount++;
-        }
+            turnCount++;
+            self.myRect = third;
+            [self setNeedsDisplay];
     } else if (CGRectContainsPoint(fourth, p)) {
-        if (![self.regularView4 isUserInteractionEnabled]) {
-            
-        } else {
-            
-            if(turn) {
-                self.xview = [[Xview alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-                self.xview.backgroundColor = [UIColor clearColor];
-                [self.regularView4 addSubview:self.xview];
-        } else {
-            self.oview = [[OView alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-            self.oview.backgroundColor = [UIColor clearColor];
-            [self.regularView4 addSubview:self.oview];
-        }
-        self.regularView4.userInteractionEnabled=false;
-        turn = !turn;
-        turnCount++;
-        }
+            turnCount++;
+            self.myRect = fourth;
+        [self setNeedsDisplay];
     } else if (CGRectContainsPoint(fifth, p)) {
-        if (![self.regularView5 isUserInteractionEnabled]) {
-            
-        } else {
-            
-        if(turn) {
-            self.xview = [[Xview alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-            self.xview.backgroundColor = [UIColor clearColor];
-            [self.regularView5 addSubview:self.xview];
-        } else {
-            self.oview = [[OView alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-            self.oview.backgroundColor = [UIColor clearColor];
-            [self.regularView5 addSubview:self.oview];
-        }
-        self.regularView5.userInteractionEnabled=false;
-        turn = !turn;
-        turnCount++;
-        }
+            turnCount++;
+            self.myRect = fifth;
+            [self setNeedsDisplay];
     } else if (CGRectContainsPoint(sixth, p)) {
-        if (![self.regularView6 isUserInteractionEnabled]) {
-            
-        } else {
-            
-        if(turn) {
-            self.xview = [[Xview alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-            self.xview.backgroundColor = [UIColor clearColor];
-            [self.regularView6 addSubview:self.xview];
-        } else {
-            self.oview = [[OView alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-            self.oview.backgroundColor = [UIColor clearColor];
-            [self.regularView6 addSubview:self.oview];
-        }
-        self.regularView6.userInteractionEnabled=false;
-        turn = !turn;
-        turnCount++;
-        }
+            turnCount++;
+            self.myRect = sixth;
+            [self setNeedsDisplay];
     } else if (CGRectContainsPoint(seventh, p)) {
-        if (![self.regularView7 isUserInteractionEnabled]) {
-            
-        } else {
-            
-        if(turn) {
-            self.xview = [[Xview alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-            self.xview.backgroundColor = [UIColor clearColor];
-            [self.regularView7 addSubview:self.xview];
-        } else {
-            self.oview = [[OView alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-            self.oview.backgroundColor = [UIColor clearColor];
-            [self.regularView7 addSubview:self.oview];
-        }
-        self.regularView7.userInteractionEnabled=false;
-        turn = !turn;
-        turnCount++;
-        }
+            turnCount++;
+            self.myRect = seventh;
+            [self setNeedsDisplay];
     } else if (CGRectContainsPoint(eight, p)) {
-        if (![self.regularView8 isUserInteractionEnabled]) {
-            
-        } else {
-            
-        if(turn) {
-            self.xview = [[Xview alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-            self.xview.backgroundColor = [UIColor clearColor];
-            [self.regularView8 addSubview:self.xview];
-        } else {
-            self.oview = [[OView alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-            self.oview.backgroundColor = [UIColor clearColor];
-            [self.regularView8 addSubview:self.oview];
-        }
-        self.regularView8.userInteractionEnabled=false;
-        turn = !turn;
-        turnCount++;
-        }
+            turnCount++;
+            self.myRect = eight;
+            [self setNeedsDisplay];
     } else if (CGRectContainsPoint(nineth, p)) {
-        if (![self.regularView9 isUserInteractionEnabled]) {
-            
-        } else {
-            
-        if(turn) {
-            self.xview = [[Xview alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-            self.xview.backgroundColor = [UIColor clearColor];
-            [self.regularView9 addSubview:self.xview];
-        } else {
-            self.oview = [[OView alloc]initWithFrame:CGRectMake(0, 0, 140, 140)];
-            self.oview.backgroundColor = [UIColor clearColor];
-            [self.regularView9 addSubview:self.oview];
-        }
-        self.regularView9.userInteractionEnabled=false;
-        turn = !turn;
-        turnCount++;
-        }
+            turnCount++;
+            self.myRect = nineth;
+            [self setNeedsDisplay];
     }
-    if (turnCount == 9) {
+    
+    if (turnCount == 8) {
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 500, 200, 30)];
         label.text = @"It's a tie";
         [self addSubview:label];
