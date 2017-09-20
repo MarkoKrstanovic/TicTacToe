@@ -18,10 +18,10 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self.gameView action:@selector(add:)];
+        [self.gameView addGestureRecognizer: tap];
     
-    if( ![self.view isKindOfClass:[CustomBackground class]]) {
-         self.view = [[CustomBackground alloc]init];
-    }
 }
 @end
 

@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomBackground.h"
 
 @interface ViewController : UIViewController
+@property (strong, nonatomic) IBOutlet CustomBackground *gameView;
 
 @end
 

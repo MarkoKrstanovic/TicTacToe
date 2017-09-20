@@ -17,11 +17,14 @@
                         <viewControllerLayoutGuide type="top" id="rIw-Tp-wfd"/>
                         <viewControllerLayoutGuide type="bottom" id="9Mc-k4-CD9"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="phG-ew-7HI">
+                    <view key="view" contentMode="scaleToFill" id="phG-ew-7HI" customClass="CustomBackground">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="gameView" destination="phG-ew-7HI" id="9cR-kK-xyI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dme-HT-qyF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
