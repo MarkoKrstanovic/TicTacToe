@@ -16,9 +16,9 @@
     UIColor *blackColor = [UIColor blackColor];
     CGContextRef context = UIGraphicsGetCurrentContext();
     UIColor * whiteColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
-    UIColor * lightRedColor = [UIColor colorWithRed:230.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
+    UIColor * grayColor = [UIColor colorWithRed:128.0/255.0 green:128.0/255.0 blue:128.0/255.0 alpha:1.0];
     CGRect paperRect = self.bounds;
-    drawLinearGradient(context, paperRect, whiteColor.CGColor, lightRedColor.CGColor);
+    drawLinearGradient(context, paperRect, whiteColor.CGColor, grayColor.CGColor);
     CGContextSetLineWidth(context, 5);
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextMoveToPoint(context, self.bounds.size.width/3, 0);
@@ -33,288 +33,233 @@
     CGContextStrokePath(context);
     x=1;
     o=3;
-    turn = !turn;
+    tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(add:)];
+    tap.delegate = self;
+    [self addGestureRecognizer:tap];
+    if(turnCount == 0){
+        turn = false;
+    }
+    NSLog(@"%@",[self binaryStringFromInteger:table]);
     
-    TableMarks tableMark1 = TableMarks1;
-    if (tabla & tableMark1 ) {
+    [self drawText:@"NewGame" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*5/6 canvasWidth:160 canvasHeight:40];
+    
+    if (self.myRect.origin.x == 0.1 && self.myRect.origin.y ==0.1 && gameOver==0) {
+        if(turn) {
+            table = table|x;
+            [self drawXwithContext:context];
+        } else  {
+            table = table|o;
+            [self drawOwithContext:context];
+        }
+        
+    }
+    else if(self.myRect.origin.x == self.bounds.size.width/3 && self.myRect.origin.y == 0 && gameOver==0) {
+        if(turn) {
+            x = x<<2;
+            table = table|x;
+            [self drawXwithContext:context];
+        } else {
+            o = o<<2;
+            table = table|o;
+            [self drawOwithContext:context];
+        }
+    }
+    else if(self.myRect.origin.x == self.bounds.size.width* 2/3 && self.myRect.origin.y ==0 && gameOver==0) {
+        if(turn) {
+            x = x<<4;
+            table = table|x;
+            [self drawXwithContext:context];
+        } else  {
+            o = o<<4;
+            table = table|o;
+            [self drawOwithContext:context];
+        }
+    }
+    else if(self.myRect.origin.x == 0 && self.myRect.origin.y ==self.bounds.size.height*1/6 && gameOver==0) {
+        if(turn) {
+            x = x<<6;
+            table = table|x;
+            [self drawXwithContext:context];
+        } else {
+            o = o<<6;
+            table = table|o;
+            [self drawOwithContext:context];
+        }
+    }
+    else if(self.myRect.origin.x == self.bounds.size.width* 1/3 && self.myRect.origin.y ==self.bounds.size.height*1/6 && gameOver==0) {
+        if(turn) {
+            x = x<<8;
+            table = table|x;
+            [self drawXwithContext:context];
+        } else {
+            o = o<<8;
+            table = table|o;
+            [self drawOwithContext:context];
+        }
+    }
+    else if(self.myRect.origin.x == self.bounds.size.width* 2/3 && self.myRect.origin.y ==self.bounds.size.height*1/6 && gameOver==0) {
+        if(turn) {
+            x = x<<10;
+            table = table|x;
+            [self drawXwithContext:context];
+        } else {
+            o = o<<10;
+            table = table|o;
+            [self drawOwithContext:context];
+        }
+    }
+    else if(self.myRect.origin.x == 0 && self.myRect.origin.y ==self.bounds.size.height*2/6 && gameOver==0) {
+        if(turn) {
+            x = x<<12;
+            table = table|x;
+            [self drawXwithContext:context];
+        } else {
+            o = o<<12;
+            table = table|o;
+            [self drawOwithContext:context];
+        }
+    }
+    else if(self.myRect.origin.x == self.bounds.size.width* 1/3 && self.myRect.origin.y ==self.bounds.size.height* 2/6 && gameOver==0) {
+        if(turn) {
+            x = x<<14;
+            table = table|x;
+            [self drawXwithContext:context];
+        } else {
+            o = o<<14;
+            table = table|o;
+            [self drawOwithContext:context];
+        }
+    }
+    else if(self.myRect.origin.x == self.bounds.size.width* 2/3 && self.myRect.origin.y ==self.bounds.size.height*2/6 && gameOver==0) {
+        if(turn) {
+            x = x<<16;
+            table = table|x;
+            [self drawXwithContext:context];
+        } else {
+            o = o<<16;
+            table = table|o;
+            [self drawOwithContext:context];
+        }
+        }
+
+    if (table & TableMarks1) {
         NSLog(@"Prva pozicija je popunjena");
     }
-    TableMarks tableMark2 = TableMarks2;
-    if (tabla & tableMark2 ) {
+    if (table & TableMarks2 ) {
         NSLog(@"Druga pozicija je popunjena");
     }
-    TableMarks tableMark3 = TableMarks3;
-    if (tabla & tableMark3 ) {
+    if (table & TableMarks3 ) {
         NSLog(@"Treca pozicija je popunjena");
     }
-    TableMarks tableMark4 = TableMarks4;
-    if (tabla & tableMark4 ) {
+    if (table & TableMarks4 ) {
         NSLog(@"Cetvrta pozicija je popunjena");
     }
-    TableMarks tableMark5 = TableMarks5;
-    if (tabla & tableMark5 ) {
+    if (table & TableMarks5 ) {
         NSLog(@"Peta pozicija je popunjena");
     }
-    TableMarks tableMark6 = TableMarks6;
-    if (tabla & tableMark6 ) {
+    if (table & TableMarks6 ) {
         NSLog(@"Sesta pozicija je popunjena");
     }
-    TableMarks tableMark7 = TableMarks7;
-    if (tabla & tableMark7 ) {
+    if (table & TableMarks7 ) {
         NSLog(@"Sedma pozicija je popunjena");
     }
-    TableMarks tableMark8 = TableMarks8;
-    if (tabla & tableMark8 ) {
+    if (table & TableMarks8 ) {
         NSLog(@"Osma pozicija je popunjena");
     }
-    TableMarks tableMark9 = TableMarks9;
-    if (tabla & tableMark9 ) {
+    if (table & TableMarks9 ) {
         NSLog(@"Deveta pozicija je popunjena");
     }
+
+    if ((table & TableMarks1) && (table & TableMarks2) && (table & TableMarks3)) {
+        if ((table & OMarks1) && (table & OMarks2) && (table & OMarks3)) {
+            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+            gameOver = 1;
+        } else if  (!(table & OMarks1) && !(table & OMarks2) && !(table & OMarks3)){
+            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+            gameOver = 1;
+        }
+    }
+    if ((table & TableMarks4) && (table & TableMarks5) && (table & TableMarks6)) {
+        if ((table & OMarks4) && (table & OMarks5) && (table & OMarks6)) {
+            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+            gameOver = 1;
+        } else if (!(table & OMarks4) && !(table & OMarks5) && !(table & OMarks6)) {
+            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+            gameOver = 1;
+        }
+      }
+    if ((table & TableMarks7) && (table & TableMarks8) && (table & TableMarks9)) {
+        if ((table & OMarks7) && (table & OMarks8) && (table & OMarks9)) {
+            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+            gameOver = 1;
+        } else if (!(table & OMarks7) && !(table & OMarks8) && !(table & OMarks9)) {
+            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+            gameOver = 1;
+        }
+      }
+    if ((table & TableMarks1) && (table & TableMarks4) && (table & TableMarks7)) {
+        if ((table & OMarks1) && (table & OMarks4) && (table & OMarks7)) {
+            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+            gameOver = 1;
+        } else if (!(table & OMarks1) && !(table & OMarks4) && !(table & OMarks7)) {
+            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+            gameOver = 1;
+            }
+      }
+    if ((table & TableMarks2) && (table & TableMarks5) && (table & TableMarks8)) {
+        if ((table & OMarks2) && (table & OMarks5) && (table & OMarks8)) {
+            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+            gameOver = 1;
+        } else if (!(table & OMarks2) && !(table & OMarks5) && !(table & OMarks8)) {
+            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+            gameOver = 1;
+        }
+      }
+    if ((table & TableMarks3) && (table & TableMarks6) && (table & TableMarks9)) {
+        if ((table & OMarks3) && (table & OMarks6) && (table & OMarks9)) {
+            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+            gameOver = 1;
+        } else if (!(table & OMarks3) && !(table & OMarks6) && !(table & OMarks9)) {
+            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+            gameOver = 1;
+        }
+      }
+     if ((table & TableMarks1) && (table & TableMarks5) && (table & TableMarks9)) {
+        if ((table & OMarks1) && (table & OMarks5) && (table & OMarks9)) {
+            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+            gameOver = 1;
+        } else if (!(table & OMarks1) && !(table & OMarks5) && !(table & OMarks9)) {
+            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+            gameOver = 1;
+        }
+      }
+     if ((table & TableMarks3) && (table & TableMarks5) && (table & TableMarks7)) {
+        if ((table & OMarks3) && (table & OMarks5) && (table & OMarks7)) {
+            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+            gameOver = 1;
+        } else if (!(table & OMarks3) && !(table & OMarks5) && !(table & OMarks7)) {
+            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+            gameOver = 1;
+        }
+        
+     }
+    NSLog(@"%@",[self binaryStringFromInteger:table]);
+    turn = !turn;
+    
+    if (turnCount == 9 && gameOver==0) {
+        
+        [self drawText:@"It's a tie game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+    }
+    
     TableMarks fullTable = TableMarks1 | TableMarks2 | TableMarks3 | TableMarks4 | TableMarks5 | TableMarks6 | TableMarks7 | TableMarks8 | TableMarks9;
     
     NSLog(@"%@",[self binaryStringFromInteger:fullTable]);
     
-    if ((tabla & tableMark1) && (tabla & tableMark2) && (tabla & tableMark3) && (tabla & tableMark4) && (tabla & tableMark5) && (tabla & tableMark6) && (tabla & tableMark7) && (tabla & tableMark8) && (tabla & tableMark9))
+    if ((table & TableMarks1) && (table & TableMarks2) && (table & TableMarks3) && (table & TableMarks4) && (table & TableMarks5) && (table & TableMarks6) && (table & TableMarks7) && (table & TableMarks8) && (table & TableMarks9))
     {
         NSLog(@"Popunjena tabela");
-        
-        for (UIGestureRecognizer *recognizer in self.gestureRecognizers) {
-            [self removeGestureRecognizer:recognizer];
-        }
-    }
-    else {
-    tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(add:)];
-    tap.delegate = self;
-    [self addGestureRecognizer:tap];
     }
     
-    if (self.myRect.origin.x == 0.1 && self.myRect.origin.y ==0.1) {
-        if(turn && a1 == 0) {
-            tabla = tabla|x;
-            a1 = 1;
-            [self drawXwithContext:context];
-        } else if(a1==0) {
-            tabla = tabla|o;
-            a1 = 2;
-            [self drawOwithContext:context];
-        }
-
-    }
-    else if(self.myRect.origin.x == self.bounds.size.width/3 && self.myRect.origin.y == 0) {
-        if(turn && a2 == 0) {
-            x = x<<2;
-            tabla = tabla|x;
-            a2 = 1;
-            [self drawXwithContext:context];
-        } else if(a2==0) {
-            o = o<<2;
-            tabla = tabla|o;
-            a2 = 2;
-            [self drawOwithContext:context];
-        }
-    }
-    else if(self.myRect.origin.x == self.bounds.size.width* 2/3 && self.myRect.origin.y ==0) {
-        if(turn && a3 == 0) {
-            x = x<<4;
-            tabla = tabla|x;
-            a3 = 1;
-            [self drawXwithContext:context];
-        } else if(a3==0) {
-            o = o<<4;
-            tabla = tabla|o;
-            a3 = 2;
-            [self drawOwithContext:context];
-        }
-    }
-    else if(self.myRect.origin.x == 0 && self.myRect.origin.y ==self.bounds.size.height*1/6) {
-        if(turn && b1 == 0) {
-            x = x<<6;
-            tabla = tabla|x;
-            b1 = 1;
-            [self drawXwithContext:context];
-        } else if(b1==0) {
-            o = o<<6;
-            tabla = tabla|o;
-            b1 = 2;
-            [self drawOwithContext:context];
-        }
-    }
-    else if(self.myRect.origin.x == self.bounds.size.width* 1/3 && self.myRect.origin.y ==self.bounds.size.height*1/6) {
-        if(turn && b2 == 0) {
-            x = x<<8;
-            tabla = tabla|x;
-            b2 = 1;
-            [self drawXwithContext:context];
-        } else if(b2==0){
-            o = o<<8;
-            tabla = tabla|o;
-            b2 = 2;
-            [self drawOwithContext:context];
-        }
-    }
-    else if(self.myRect.origin.x == self.bounds.size.width* 2/3 && self.myRect.origin.y ==self.bounds.size.height*1/6) {
-        if(turn && b3 == 0) {
-            x = x<<10;
-            tabla = tabla|x;
-            b3 = 1;
-            [self drawXwithContext:context];
-        } else if(b3==0) {
-            o = o<<10;
-            tabla = tabla|o;
-            b3 = 2;
-            [self drawOwithContext:context];
-        }
-    }
-    else if(self.myRect.origin.x == 0 && self.myRect.origin.y ==self.bounds.size.height*2/6) {
-        if(turn && c1 == 0) {
-            x = x<<12;
-            tabla = tabla|x;
-            c1 = 1;
-            [self drawXwithContext:context];
-        } else if(c1==0){
-            o = o<<12;
-            tabla = tabla|o;
-            c1 = 2;
-            [self drawOwithContext:context];
-        }
-    }
-    else if(self.myRect.origin.x == self.bounds.size.width* 1/3 && self.myRect.origin.y ==self.bounds.size.height* 2/6) {
-        if(turn && c2 == 0) {
-            x = x<<14;
-            tabla = tabla|x;
-            c2 = 1;
-            [self drawXwithContext:context];
-        } else if(c2==0) {
-            o = o<<14;
-            tabla = tabla|o;
-            c2 = 2;
-            [self drawOwithContext:context];
-        }
-    }
-    else if(self.myRect.origin.x == self.bounds.size.width* 2/3 && self.myRect.origin.y ==self.bounds.size.height*2/6) {
-        if(turn && c3 == 0) {
-            x = x<<16;
-            tabla = tabla|x;
-            c3 = 1;
-            [self drawXwithContext:context];
-        } else if(c3==0) {
-            o = o<<16;
-            tabla = tabla|o;
-            c3 = 2;
-            [self drawOwithContext:context];
-        }
-        }
-    if (a1 == 1 && a2 == 1 && a3 == 1) {
-
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(300, 500, 200, 30)];
-        label.text = @"X wins";
-        [self addSubview:label];
-        gameOver = 1;
-        
-    } else if (b1 == 1 && b2 == 1 && b3 == 1) {
-        
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(300, 500, 200, 30)];
-        label.text = @"X wins";
-        [self addSubview:label];
-        gameOver = 1;
-    } else if (c1 == 1 && c2 == 1 && c3 == 1) {
-        
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(300, 500, 200, 30)];
-        label.text = @"X wins";
-        [self addSubview:label];
-        gameOver = 1;
-    } else if (a1 == 1 && b2 == 1 && c3 == 1) {
-        
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(300, 500, 200, 30)];
-        label.text = @"X wins";
-        [self addSubview:label];
-        gameOver = 1;
-    } else if (a3 == 1 && b2 == 1 && c1 == 1) {
-        
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(300, 500, 200, 30)];
-        label.text = @"X wins";
-        [self addSubview:label];
-        gameOver = 1;
-    } else if (a1 == 1 && b1 == 1 && c1 == 1) {
-        
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(300, 500, 200, 30)];
-        label.text = @"X wins";
-        [self addSubview:label];
-        gameOver = 1;
-    } else if (a2 == 1 && b2 == 1 && c2 == 1) {
-        
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(300, 500, 200, 30)];
-        label.text = @"X wins";
-        [self addSubview:label];
-        gameOver = 1;
-    } else if (a3 == 1 && b3 == 1 && c3 == 1) {
-        
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(300, 500, 200, 30)];
-        label.text = @"X wins";
-        [self addSubview:label];
-        gameOver = 1;
-    } else if (a1 == 2 && a2 == 2 && a3 == 2) {
-        
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(300, 500, 200, 30)];
-        label.text = @"O wins";
-        [self addSubview:label];
-        gameOver = 1;
-    } else if (b1 == 2 && b2 == 2 && b3 == 2) {
-        
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(300, 500, 200, 30)];
-        label.text = @"O wins";
-        [self addSubview:label];
-        gameOver = 1;
-    } else if (c1 == 2 && c2 == 2 && c3 == 2) {
-        
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(300, 500, 200, 30)];
-        label.text = @"O wins";
-        [self addSubview:label];
-        gameOver = 1;
-    } else if (a1 == 2 && b2 == 2 && c3 == 2) {
-        
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(300, 500, 200, 30)];
-        label.text = @"O wins";
-        [self addSubview:label];
-        gameOver = 1;
-    } else if (a3 == 2 && b2 == 2 && c1 == 2) {
-        
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(300, 500, 200, 30)];
-        label.text = @"O wins";
-        [self addSubview:label];
-        gameOver = 1;
-    } else if (a1 == 2 && b1 == 2 && c1 == 2) {
-        
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(300, 500, 200, 30)];
-        label.text = @"O wins";
-        [self addSubview:label];
-        gameOver = 1;
-    } else if (a2 == 2 && b2 == 2 && c2 == 2) {
-        
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(300, 500, 200, 30)];
-        label.text = @"O wins";
-        [self addSubview:label];
-        gameOver = 1;
-    } else if (a3 == 2 && b3 == 2 && c3 == 2) {
-        
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(300, 500, 200, 30)];
-        label.text = @"O wins";
-        [self addSubview:label];
-        gameOver = 1;
-        
-
-        
-        
-    }
-    NSLog(@"%@",[self binaryStringFromInteger:tabla]);
-}
-- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-{
-    if (CGRectContainsPoint(self.myRect, [touch locationInView:self]))
-        return NO;
-    
-    return YES;
 }
 
 -(void)drawXwithContext:(CGContextRef)context {
@@ -328,21 +273,16 @@
     CGContextAddLineToPoint(context, self.myRect.origin.x+20, self.myRect.origin.y+110);
     CGContextSetStrokeColorWithColor(context, blue);
     CGContextStrokePath(context);
-  
+
 }
 
 -(void)drawOwithContext:(CGContextRef)context {
     
-    CGColorRef blue = [[UIColor blueColor] CGColor];
-    CGContextSetLineWidth(context, 10);
-    CGContextSetLineCap(context, kCGLineCapRound);
-    CGContextMoveToPoint(context, self.myRect.origin.x+25, self.myRect.origin.y+15);
-    CGContextAddLineToPoint(context, self.myRect.origin.x+100, self.myRect.origin.y+15);
-    CGContextAddLineToPoint(context, self.myRect.origin.x+100, self.myRect.origin.y+110);
-    CGContextAddLineToPoint(context, self.myRect.origin.x+25, self.myRect.origin.y+110);
-    CGContextAddLineToPoint(context, self.myRect.origin.x+25, self.myRect.origin.y+15);
-    CGContextSetStrokeColorWithColor(context, blue);
-    CGContextStrokePath(context);
+    CGContextAddEllipseInRect(context, CGRectMake(self.myRect.origin.x+20, self.myRect.origin.y+10, 95,100));
+    CGContextClosePath(context);
+    CGContextAddEllipseInRect(context, CGRectMake(self.myRect.origin.x+30, self.myRect.origin.y+20, 75, 80));
+    CGContextSetRGBFillColor(context, 1, 0, 0, 1);
+    CGContextEOFillPath(context);
     
 }
 
@@ -365,77 +305,194 @@
     CGRect eight = CGRectMake(self.bounds.size.width* 1/3, self.bounds.size.height* 2/6, self.bounds.size.width* 1/3, self.bounds.size.height*1/6);
     CGRect nineth = CGRectMake(self.bounds.size.width* 2/3, self.bounds.size.height*2/6, self.bounds.size.width* 1/3, self.bounds.size.height*1/6);
     
-    if(CGRectContainsPoint(first, p)){
+    CGRect newGame = CGRectMake(self.bounds.size.width*1/3, self.bounds.size.height*5/6, 160.0, 40.0);
+    if(CGRectContainsPoint(newGame, p)){
+        turnCount = 0;
+        self.newGame = newGame;
+        gameOver = 0;
+        table = 0;
+        self.myRect = CGRectZero;
+       turn = !turn;
+        [self binaryStringFromInteger:table];
+        [self setNeedsDisplay];
+        
+    }
+      else if(CGRectContainsPoint(first, p) && !(table & TableMarks1)){
             turnCount++;
-        self.turnbool++;
             self.myRect = first;
-        if(a1==0){
+        if(!(table & TableMarks1)){
             [self setNeedsDisplayInRect:first];
+            if(turn){
+                table = table|x;
+            }else
+                table = table|o;
         }
-    } else if (CGRectContainsPoint(second, p)) {
+    } else if (CGRectContainsPoint(second, p) && !(table & TableMarks2)) {
             turnCount++;
-        self.turnbool++;
-            self.myRect = second;
-        if(a2==0) {
+        self.myRect = second;
+        if(!(table & TableMarks2)) {
             [self setNeedsDisplayInRect:second];
+            if(turn){
+                x=x<<2;
+                table = table|x;
+            }else {
+                o=o<<2;
+                table = table|o;
+            }
         }
         
-    } else if (CGRectContainsPoint(third, p)) {
+    } else if (CGRectContainsPoint(third, p) && !(table & TableMarks3)) {
             turnCount++;
-        self.turnbool++;
             self.myRect = third;
-        if(a3==0) {
+        if(!(table & TableMarks3)) {
             [self setNeedsDisplayInRect:third];
-             }
-    } else if (CGRectContainsPoint(fourth, p)) {
-            turnCount++;
-        self.turnbool++;
-            self.myRect = fourth;
-        if(b1==0) {
-        [self setNeedsDisplayInRect:fourth];
+            if(turn){
+                x=x<<4;
+                table = table|x;
+            }else {
+                o=o<<4;
+                table = table|o;
+            }
         }
-    } else if (CGRectContainsPoint(fifth, p)) {
+    } else if (CGRectContainsPoint(fourth, p) && !(table & TableMarks4)) {
             turnCount++;
-        self.turnbool++;
+            self.myRect = fourth;
+        if(!(table & TableMarks4)) {
+        [self setNeedsDisplayInRect:fourth];
+            if(turn){
+                x=x<<6;
+                table = table|x;
+            }else {
+                o=o<<6;
+                table = table|o;
+            }
+        }
+    } else if (CGRectContainsPoint(fifth, p) && !(table & TableMarks5)) {
+            turnCount++;
             self.myRect = fifth;
-        if (b2==0) {
+        if (!(table & TableMarks5)) {
         
            [self setNeedsDisplayInRect:fifth];
+            if(turn){
+                x=x<<8;
+                table = table|x;
+            }else {
+                o=o<<8;
+                table = table|o;
+            }
         }
-    } else if (CGRectContainsPoint(sixth, p)) {
-            turnCount++;
-        self.turnbool++;
+    } else if (CGRectContainsPoint(sixth, p) && !(table & TableMarks6)) {
+        turnCount++;
             self.myRect = sixth;
-        if(b3==0) {
+        if(!(table & TableMarks6)) {
             [self setNeedsDisplayInRect:sixth];
+            if(turn){
+                x=x<<10;
+                table = table|x;
+            }else {
+                o=o<<10;
+                table = table|o;
+                }
         }
-    } else if (CGRectContainsPoint(seventh, p)) {
+    } else if (CGRectContainsPoint(seventh, p) && !(table & TableMarks7)) {
             turnCount++;
-        self.turnbool++;
             self.myRect = seventh;
-        if(c1==0) {
+        if(!(table & TableMarks7)) {
             [self setNeedsDisplayInRect:seventh];
+            if(turn){
+                x=x<<12;
+                table = table|x;
+            }else {
+                o=o<<12;
+                table = table|o;
+            }
         }
-    } else if (CGRectContainsPoint(eight, p)) {
+    } else if (CGRectContainsPoint(eight, p) && !(table & TableMarks8)) {
             turnCount++;
-        self.turnbool++;
             self.myRect = eight;
-        if(c2==0) {
+        if(!(table & TableMarks8)) {
             [self setNeedsDisplayInRect:eight];
+            if(turn){
+                x=x<<14;
+                table = table|x;
+            }else {
+                o=o<<14;
+                table = table|o;
+            }
         }
-    } else if (CGRectContainsPoint(nineth, p)) {
+    } else if (CGRectContainsPoint(nineth, p) && !(table & TableMarks9)) {
             turnCount++;
-        self.turnbool++;
             self.myRect = nineth;
-        if(c3==0){
+        if(!(table & TableMarks9)){
             [self setNeedsDisplayInRect:nineth];
+            if(turn){
+                x=x<<16;
+                table = table|x;
+            }else {
+                o=o<<16;
+                table = table|o;
+            }
         }
     }
-    
-    if (/*turnCount == 9 ||*/ self.turnbool == 9) {
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 500, 200, 30)];
-        label.text = @"It's a tie";
-        [self addSubview:label];
+    if(turnCount == 9) {
+        
+        [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+        
+    }
+    if ((table & TableMarks1) && (table & TableMarks2) && (table & TableMarks3)) {
+        if((table & OMarks1) && (table & OMarks2) && (table & OMarks3)) {
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+        } else if(!(table & OMarks1) && !(table & OMarks2) && !(table & OMarks3))
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+        
+    }
+    if ((table & TableMarks4) && (table & TableMarks5) && (table & TableMarks6)) {
+         if((table & OMarks4) && (table & OMarks5) && (table & OMarks6))
+             [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+         else if(!(table & OMarks4) && !(table & OMarks5) && !(table & OMarks6))
+             [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+        
+    }
+    if ((table & TableMarks7) && (table & TableMarks8) && (table & TableMarks9)) {
+        if ((table & OMarks7) && (table & OMarks8) && (table & OMarks9))
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+        else if (!(table & OMarks7) && !(table & OMarks8) && !(table & OMarks9))
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+        
+    }
+    if ((table & TableMarks1) && (table & TableMarks4) && (table & TableMarks7)) {
+        if((table & OMarks1) && (table & OMarks4) && (table & OMarks7))
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+        else if(!(table & OMarks1) && !(table & OMarks4) && !(table & OMarks7))
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            
+    }
+    if ((table & TableMarks2) && (table & TableMarks5) && (table & TableMarks8)) {
+        if ((table & OMarks2) && (table & OMarks5) && (table & OMarks8))
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+        else  if (!(table & OMarks2) && !(table & OMarks5) && !(table & OMarks8))
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+        
+    }
+    if ((table & TableMarks3) && (table & TableMarks6) && (table & TableMarks9)) {
+        if((table & OMarks3) && (table & OMarks6) && (table & OMarks9))
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+        else if(!(table & OMarks3) && !(table & OMarks6) && !(table & OMarks9))
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+        
+    }
+    if ((table & TableMarks1) && (table & TableMarks5) && (table & TableMarks9)) {
+        if ((table & OMarks1) && (table & OMarks5) && (table & OMarks9))
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+        else  if (!(table & OMarks1) && !(table & OMarks5) && !(table & OMarks9))
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+        
+    }
+    if ((table & TableMarks3) && (table & TableMarks5) && (table & TableMarks7)) {
+        if ((table & OMarks3) && (table & OMarks5) && (table & OMarks7))
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+        else  if (!(table & OMarks3) && !(table & OMarks5) && !(table & OMarks7))
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
     }
 }
 
@@ -483,6 +540,18 @@ void drawLinearGradient(CGContextRef context, CGRect rect, CGColorRef startColor
     return string;
 }
 
+- (void)drawText:(NSString*)string withX:(CGFloat)xPosition yPosition:(CGFloat)yPosition canvasWidth:(CGFloat)canvasWidth canvasHeight:(CGFloat)canvasHeight
+{
+    //Draw Text
+    CGRect textRect = CGRectMake(xPosition, yPosition, canvasWidth, canvasHeight);
+    NSMutableParagraphStyle* textStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
+    textStyle.alignment = NSTextAlignmentLeft;
+    
+    NSDictionary* textFontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"Helvetica" size: 20], NSForegroundColorAttributeName: UIColor.redColor, NSParagraphStyleAttributeName: textStyle};
+    
+    [string drawInRect: textRect withAttributes: textFontAttributes];
+}
+
 typedef NS_OPTIONS(int, TableMarks) {
     TableMarks1 = 1 << 0,
     TableMarks2 = 1 << 2,
@@ -494,5 +563,18 @@ typedef NS_OPTIONS(int, TableMarks) {
     TableMarks8 = 1 << 14,
     TableMarks9 = 1 << 16,
 };
+
+typedef NS_OPTIONS(int, OMarks) {
+    OMarks1 = 1 << 1,
+    OMarks2 = 1 << 3,
+    OMarks3 = 1 << 5,
+    OMarks4 = 1 << 7,
+    OMarks5 = 1 << 9,
+    OMarks6 = 1 << 11,
+    OMarks7 = 1 << 13,
+    OMarks8 = 1 << 15,
+    OMarks9 = 1 << 17,
+};
+
 
 @end
