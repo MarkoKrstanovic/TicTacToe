@@ -23,6 +23,7 @@
 }
 @property (nonatomic) CGRect myRect;
 @property (nonatomic) CGRect newGame;
+@property (nonatomic) CGRect AI;
 @property (nonatomic) CGPoint mypoint;
 -(void)add:(UIGestureRecognizer*)tap1;
 

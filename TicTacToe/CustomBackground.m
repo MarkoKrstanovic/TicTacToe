@@ -9,8 +9,7 @@
 #import "CustomBackground.h"
 
 @implementation CustomBackground
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
+
 - (void)drawRect:(CGRect)rect {
     // Drawing code
     UIColor *blackColor = [UIColor blackColor];
@@ -37,111 +36,12 @@
     tap.delegate = self;
     [self addGestureRecognizer:tap];
     if(turnCount == 0){
-        turn = false;
+        turn = true;
     }
     NSLog(@"%@",[self binaryStringFromInteger:table]);
     
     [self drawText:@"NewGame" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*5/6 canvasWidth:160 canvasHeight:40];
     
-    if (self.myRect.origin.x == 0.1 && self.myRect.origin.y ==0.1 && gameOver==0) {
-        if(turn) {
-            table = table|x;
-            [self drawXwithContext:context];
-        } else  {
-            table = table|o;
-            [self drawOwithContext:context];
-        }
-        
-    }
-    else if(self.myRect.origin.x == self.bounds.size.width/3 && self.myRect.origin.y == 0 && gameOver==0) {
-        if(turn) {
-            x = x<<2;
-            table = table|x;
-            [self drawXwithContext:context];
-        } else {
-            o = o<<2;
-            table = table|o;
-            [self drawOwithContext:context];
-        }
-    }
-    else if(self.myRect.origin.x == self.bounds.size.width* 2/3 && self.myRect.origin.y ==0 && gameOver==0) {
-        if(turn) {
-            x = x<<4;
-            table = table|x;
-            [self drawXwithContext:context];
-        } else  {
-            o = o<<4;
-            table = table|o;
-            [self drawOwithContext:context];
-        }
-    }
-    else if(self.myRect.origin.x == 0 && self.myRect.origin.y ==self.bounds.size.height*1/6 && gameOver==0) {
-        if(turn) {
-            x = x<<6;
-            table = table|x;
-            [self drawXwithContext:context];
-        } else {
-            o = o<<6;
-            table = table|o;
-            [self drawOwithContext:context];
-        }
-    }
-    else if(self.myRect.origin.x == self.bounds.size.width* 1/3 && self.myRect.origin.y ==self.bounds.size.height*1/6 && gameOver==0) {
-        if(turn) {
-            x = x<<8;
-            table = table|x;
-            [self drawXwithContext:context];
-        } else {
-            o = o<<8;
-            table = table|o;
-            [self drawOwithContext:context];
-        }
-    }
-    else if(self.myRect.origin.x == self.bounds.size.width* 2/3 && self.myRect.origin.y ==self.bounds.size.height*1/6 && gameOver==0) {
-        if(turn) {
-            x = x<<10;
-            table = table|x;
-            [self drawXwithContext:context];
-        } else {
-            o = o<<10;
-            table = table|o;
-            [self drawOwithContext:context];
-        }
-    }
-    else if(self.myRect.origin.x == 0 && self.myRect.origin.y ==self.bounds.size.height*2/6 && gameOver==0) {
-        if(turn) {
-            x = x<<12;
-            table = table|x;
-            [self drawXwithContext:context];
-        } else {
-            o = o<<12;
-            table = table|o;
-            [self drawOwithContext:context];
-        }
-    }
-    else if(self.myRect.origin.x == self.bounds.size.width* 1/3 && self.myRect.origin.y ==self.bounds.size.height* 2/6 && gameOver==0) {
-        if(turn) {
-            x = x<<14;
-            table = table|x;
-            [self drawXwithContext:context];
-        } else {
-            o = o<<14;
-            table = table|o;
-            [self drawOwithContext:context];
-        }
-    }
-    else if(self.myRect.origin.x == self.bounds.size.width* 2/3 && self.myRect.origin.y ==self.bounds.size.height*2/6 && gameOver==0) {
-        if(turn) {
-            x = x<<16;
-            table = table|x;
-            [self drawXwithContext:context];
-        } else {
-            o = o<<16;
-            table = table|o;
-            [self drawOwithContext:context];
-        }
-        }
-
     if (table & TableMarks1) {
         NSLog(@"Prva pozicija je popunjena");
     }
@@ -169,92 +69,250 @@
     if (table & TableMarks9 ) {
         NSLog(@"Deveta pozicija je popunjena");
     }
-
-    if ((table & TableMarks1) && (table & TableMarks2) && (table & TableMarks3)) {
-        if ((table & OMarks1) && (table & OMarks2) && (table & OMarks3)) {
-            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
-            gameOver = 1;
-        } else if  (!(table & OMarks1) && !(table & OMarks2) && !(table & OMarks3)){
-            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
-            gameOver = 1;
-        }
-    }
-    if ((table & TableMarks4) && (table & TableMarks5) && (table & TableMarks6)) {
-        if ((table & OMarks4) && (table & OMarks5) && (table & OMarks6)) {
-            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
-            gameOver = 1;
-        } else if (!(table & OMarks4) && !(table & OMarks5) && !(table & OMarks6)) {
-            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
-            gameOver = 1;
-        }
-      }
-    if ((table & TableMarks7) && (table & TableMarks8) && (table & TableMarks9)) {
-        if ((table & OMarks7) && (table & OMarks8) && (table & OMarks9)) {
-            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
-            gameOver = 1;
-        } else if (!(table & OMarks7) && !(table & OMarks8) && !(table & OMarks9)) {
-            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
-            gameOver = 1;
-        }
-      }
-    if ((table & TableMarks1) && (table & TableMarks4) && (table & TableMarks7)) {
-        if ((table & OMarks1) && (table & OMarks4) && (table & OMarks7)) {
-            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
-            gameOver = 1;
-        } else if (!(table & OMarks1) && !(table & OMarks4) && !(table & OMarks7)) {
-            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
-            gameOver = 1;
-            }
-      }
-    if ((table & TableMarks2) && (table & TableMarks5) && (table & TableMarks8)) {
-        if ((table & OMarks2) && (table & OMarks5) && (table & OMarks8)) {
-            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
-            gameOver = 1;
-        } else if (!(table & OMarks2) && !(table & OMarks5) && !(table & OMarks8)) {
-            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
-            gameOver = 1;
-        }
-      }
-    if ((table & TableMarks3) && (table & TableMarks6) && (table & TableMarks9)) {
-        if ((table & OMarks3) && (table & OMarks6) && (table & OMarks9)) {
-            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
-            gameOver = 1;
-        } else if (!(table & OMarks3) && !(table & OMarks6) && !(table & OMarks9)) {
-            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
-            gameOver = 1;
-        }
-      }
-     if ((table & TableMarks1) && (table & TableMarks5) && (table & TableMarks9)) {
-        if ((table & OMarks1) && (table & OMarks5) && (table & OMarks9)) {
-            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
-            gameOver = 1;
-        } else if (!(table & OMarks1) && !(table & OMarks5) && !(table & OMarks9)) {
-            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
-            gameOver = 1;
-        }
-      }
-     if ((table & TableMarks3) && (table & TableMarks5) && (table & TableMarks7)) {
-        if ((table & OMarks3) && (table & OMarks5) && (table & OMarks7)) {
-            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
-            gameOver = 1;
-        } else if (!(table & OMarks3) && !(table & OMarks5) && !(table & OMarks7)) {
-            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
-            gameOver = 1;
-        }
-        
-     }
-    NSLog(@"%@",[self binaryStringFromInteger:table]);
-    turn = !turn;
     
-    if (turnCount == 9 && gameOver==0) {
-        
+    if (self.myRect.origin.x == 0.1 && self.myRect.origin.y ==0.1) {
+        table = table|x;
+        [self drawXwithContext:context];
+    }
+    else if(self.myRect.origin.x == self.bounds.size.width/3 && self.myRect.origin.y == 0 ) {
+        x = x<<2;
+        table = table|x;
+        [self drawXwithContext:context];
+    }
+    else if(self.myRect.origin.x == self.bounds.size.width* 2/3 && self.myRect.origin.y ==0) {
+        x = x<<4;
+        table = table|x;
+        [self drawXwithContext:context];
+    }
+    else if(self.myRect.origin.x == 0 && self.myRect.origin.y ==self.bounds.size.height*1/6) {
+        x = x<<6;
+        table = table|x;
+        [self drawXwithContext:context];
+    }
+    else if(self.myRect.origin.x == self.bounds.size.width* 1/3 && self.myRect.origin.y ==self.bounds.size.height*1/6) {
+        x = x<<8;
+        table = table|x;
+        [self drawXwithContext:context];
+    }
+    else if(self.myRect.origin.x == self.bounds.size.width* 2/3 && self.myRect.origin.y ==self.bounds.size.height*1/6) {
+        //        if(turn) {
+        x = x<<10;
+        table = table|x;
+        [self drawXwithContext:context];
+    }
+    else if(self.myRect.origin.x == 0 && self.myRect.origin.y ==self.bounds.size.height*2/6) {
+        x = x<<12;
+        table = table|x;
+        [self drawXwithContext:context];
+    }
+    else if(self.myRect.origin.x == self.bounds.size.width* 1/3 && self.myRect.origin.y ==self.bounds.size.height* 2/6) {
+        x = x<<14;
+        table = table|x;
+        [self drawXwithContext:context];
+    }
+    else if(self.myRect.origin.x == self.bounds.size.width* 2/3 && self.myRect.origin.y ==self.bounds.size.height*2/6) {
+        x = x<<16;
+        table = table|x;
+        [self drawXwithContext:context];
+    }
+    // Draw O wins
+    if(turn == false) {
+        //horizontaly
+        if ((table & TableMarks1) && (table & TableMarks2) && (table & OMarks1) && (table & OMarks2) && !(table & TableMarks3) ) {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks2) && (table & TableMarks3) && (table & OMarks2) && (table & OMarks3) && !(table & TableMarks1)) {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks1) && (table & TableMarks3) && (table & OMarks1) && (table & OMarks3) && !(table & TableMarks2)) {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks4) && (table & TableMarks5) && (table & OMarks4) && (table & OMarks5) && !(table & TableMarks6)) {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks5) && (table & TableMarks6) && (table & OMarks5) && (table & OMarks6) && !(table & TableMarks4)) {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks4) && (table & TableMarks6) && (table & OMarks4) && (table & OMarks6) && !(table & TableMarks5)) {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks7) && (table & TableMarks8) && (table & OMarks7) && (table & OMarks8) && !(table & TableMarks9)) {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks8) && (table & TableMarks9) && (table & OMarks8) && (table & OMarks9) && !(table & TableMarks7)) {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks7) && (table & TableMarks9) && (table & OMarks7) && (table & OMarks9) && !(table & TableMarks8)) {
+            [self drawOwithContext:context];
+        }
+        // verticaly
+        else if ((table & TableMarks1) && (table & TableMarks4) && (table & OMarks1) && (table & OMarks4) && !(table & TableMarks7)) {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks4) && (table & TableMarks7) && (table & OMarks4) && (table & OMarks7) && !(table & TableMarks1)) {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks1) && (table & TableMarks7) && (table & OMarks1) && (table & OMarks7) && !(table & TableMarks4)) {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks2) && (table & TableMarks5) && (table & OMarks2) && (table & OMarks5) && !(table & TableMarks8)) {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks5) && (table & TableMarks8) && (table & OMarks5) && (table & OMarks8) && !(table & TableMarks2)) {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks2) && (table & TableMarks8) && (table & OMarks2) && (table & OMarks8) && !(table & TableMarks5)) {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks3) && (table & TableMarks6) && (table & OMarks3) && (table & OMarks6) && !(table & TableMarks9)) {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks6) && (table & TableMarks9) && (table & OMarks6) && (table & OMarks9) && !(table & TableMarks3)) {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks3) && (table & TableMarks9) && (table & OMarks3) && (table & OMarks9) && !(table & TableMarks6)) {
+            [self drawOwithContext:context];
+        }
+        //Draw O horizontaly
+        else if ((table & TableMarks1) && (table & TableMarks2) && !(table & OMarks1) && !(table & OMarks2)) {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks2) && (table & TableMarks3) && !(table & OMarks2) && !(table & OMarks3))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks1) && (table & TableMarks3) && !(table & OMarks1) && !(table & OMarks3))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks4) && (table & TableMarks5) && !(table & OMarks4) && !(table & OMarks5))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks5) && (table & TableMarks6) && !(table & OMarks5) && !(table & OMarks6))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks4) && (table & TableMarks6) && !(table & OMarks4) && !(table & OMarks6))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks7) && (table & TableMarks8) && !(table & OMarks7) && !(table & OMarks8))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks8) && (table & TableMarks9) && !(table & OMarks8) && !(table & OMarks9))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks7) && (table & TableMarks9) && !(table & OMarks7) && !(table & OMarks9))  {
+            [self drawOwithContext:context];
+        }
+        // verticaly
+        else if ((table & TableMarks1) && (table & TableMarks4) && !(table & OMarks1) && !(table & OMarks4)) {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks4) && (table & TableMarks7) && !(table & OMarks4) && !(table & OMarks7))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks1) && (table & TableMarks7) && !(table & OMarks1) && !(table & OMarks7))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks2) && (table & TableMarks5) && !(table & OMarks2) && !(table & OMarks5))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks5) && (table & TableMarks8) && !(table & OMarks5) && !(table & OMarks8))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks2) && (table & TableMarks8) && !(table & OMarks2) && !(table & OMarks8))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks3) && (table & TableMarks6) && !(table & OMarks3) && !(table & OMarks6))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks6) && (table & TableMarks9) && !(table & OMarks6) && !(table & OMarks9))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks3) && (table & TableMarks9) && !(table & OMarks3) && !(table & OMarks9))  {
+            [self drawOwithContext:context];
+        }
+        //diagonaly
+        else if ((table & TableMarks1) && (table & TableMarks5) && !(table & OMarks1) && !(table & OMarks5))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks5) && (table & TableMarks9) && !(table & OMarks5) && !(table & OMarks9))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks1) && (table & TableMarks9) && !(table & OMarks1) && !(table & OMarks9))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks3) && (table & TableMarks5) && !(table & OMarks3) && !(table & OMarks5))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks5) && (table & TableMarks7) && !(table & OMarks7) && !(table & OMarks7))  {
+            [self drawOwithContext:context];
+        }
+        else if ((table & TableMarks3) && (table & TableMarks7) && !(table & OMarks3) && !(table & OMarks7))  {
+            [self drawOwithContext:context];
+        }
+        // singles
+        else if ((!(table & TableMarks1) || !(table & TableMarks2) || !(table & TableMarks3) || !(table & TableMarks4) || !(table & TableMarks5) || !(table & TableMarks6) || !(table & TableMarks7) || !(table & TableMarks8) || !(table & TableMarks9) )) {
+            [self drawOwithContext:context];
+        }
+        turnCount++;
+//        turn = !turn;
+    }
+        //Draw winner's rect and finish the game
+    if ((table & TableMarks1) && (table & TableMarks2) && (table & TableMarks3)) {
+        if ((table & OMarks1) && (table & OMarks2) && (table & OMarks3))
+            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+        else if  (!(table & OMarks1) && !(table & OMarks2) && !(table & OMarks3))
+            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+
+    }
+    if ((table & TableMarks4) && (table & TableMarks5) && (table & TableMarks6)){
+        if ((table & OMarks4) && (table & OMarks5) && (table & OMarks6))
+            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+        else if (!(table & OMarks4) && !(table & OMarks5) && !(table & OMarks6))
+            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+    }
+    if ((table & TableMarks7) && (table & TableMarks8) && (table & TableMarks9)) {
+        if ((table & OMarks7) && (table & OMarks8) && (table & OMarks9))
+            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+        else if (!(table & OMarks7) && !(table & OMarks8) && !(table & OMarks9))
+            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+    }
+    if ((table & TableMarks1) && (table & TableMarks4) && (table & TableMarks7)) {
+        if ((table & OMarks1) && (table & OMarks4) && (table & OMarks7))
+            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+        else if (!(table & OMarks1) && !(table & OMarks4) && !(table & OMarks7))
+            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+    }
+    if ((table & TableMarks2) && (table & TableMarks5) && (table & TableMarks8)) {
+        if ((table & OMarks2) && (table & OMarks5) && (table & OMarks8))
+            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+        else if (!(table & OMarks2) && !(table & OMarks5) && !(table & OMarks8))
+            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+    }
+    if ((table & TableMarks3) && (table & TableMarks6) && (table & TableMarks9)) {
+        if ((table & OMarks3) && (table & OMarks6) && (table & OMarks9))
+            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+        else if (!(table & OMarks3) && !(table & OMarks6) && !(table & OMarks9))
+            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+    }
+    if ((table & TableMarks1) && (table & TableMarks5) && (table & TableMarks9)) {
+        if ((table & OMarks1) && (table & OMarks5) && (table & OMarks9))
+            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+        else if (!(table & OMarks1) && !(table & OMarks5) && !(table & OMarks9))
+            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+    }
+    if ((table & TableMarks3) && (table & TableMarks5) && (table & TableMarks7)) {
+        if ((table & OMarks3) && (table & OMarks5) && (table & OMarks7))
+            [self drawText:@"O wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+        else if (!(table & OMarks3) && !(table & OMarks5) && !(table & OMarks7))
+            [self drawText:@"X wins this game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
+    }
+    
+    NSLog(@"%@",[self binaryStringFromInteger:table]);
+//    turn = !turn;
+    if (turnCount == 10 && gameOver==0) {
         [self drawText:@"It's a tie game!" withX:self.bounds.size.width*1/3 yPosition:self.bounds.size.height*4/6 canvasWidth:200 canvasHeight:200];
     }
-    
     TableMarks fullTable = TableMarks1 | TableMarks2 | TableMarks3 | TableMarks4 | TableMarks5 | TableMarks6 | TableMarks7 | TableMarks8 | TableMarks9;
-    
     NSLog(@"%@",[self binaryStringFromInteger:fullTable]);
-    
     if ((table & TableMarks1) && (table & TableMarks2) && (table & TableMarks3) && (table & TableMarks4) && (table & TableMarks5) && (table & TableMarks6) && (table & TableMarks7) && (table & TableMarks8) && (table & TableMarks9))
     {
         NSLog(@"Popunjena tabela");
@@ -278,9 +336,9 @@
 
 -(void)drawOwithContext:(CGContextRef)context {
     
-    CGContextAddEllipseInRect(context, CGRectMake(self.myRect.origin.x+20, self.myRect.origin.y+10, 95,100));
+    CGContextAddEllipseInRect(context, CGRectMake(self.AI.origin.x+20, self.AI.origin.y+10, 95,100));
     CGContextClosePath(context);
-    CGContextAddEllipseInRect(context, CGRectMake(self.myRect.origin.x+30, self.myRect.origin.y+20, 75, 80));
+    CGContextAddEllipseInRect(context, CGRectMake(self.AI.origin.x+30, self.AI.origin.y+20, 75, 80));
     CGContextSetRGBFillColor(context, 1, 0, 0, 1);
     CGContextEOFillPath(context);
     
@@ -304,6 +362,8 @@
     CGRect seventh = CGRectMake(0, self.bounds.size.height*2/6, self.bounds.size.width* 1/3, self.bounds.size.height*1/6);
     CGRect eight = CGRectMake(self.bounds.size.width* 1/3, self.bounds.size.height* 2/6, self.bounds.size.width* 1/3, self.bounds.size.height*1/6);
     CGRect nineth = CGRectMake(self.bounds.size.width* 2/3, self.bounds.size.height*2/6, self.bounds.size.width* 1/3, self.bounds.size.height*1/6);
+    turn = true;
+    // Which rect is clicked
     
     CGRect newGame = CGRectMake(self.bounds.size.width*1/3, self.bounds.size.height*5/6, 160.0, 40.0);
     if(CGRectContainsPoint(newGame, p)){
@@ -312,190 +372,697 @@
         gameOver = 0;
         table = 0;
         self.myRect = CGRectZero;
-       turn = !turn;
         [self binaryStringFromInteger:table];
         [self setNeedsDisplay];
+        turn = true;
         
     }
-      else if(CGRectContainsPoint(first, p) && !(table & TableMarks1)){
+      else if(CGRectContainsPoint(first, p) && !(table & TableMarks1) && gameOver==0){
             turnCount++;
             self.myRect = first;
-        if(!(table & TableMarks1)){
+          if(!(table & TableMarks1)){
             [self setNeedsDisplayInRect:first];
-            if(turn){
+              x=1;
                 table = table|x;
-            }else
-                table = table|o;
+              turn = false;
+
         }
-    } else if (CGRectContainsPoint(second, p) && !(table & TableMarks2)) {
+    } else if (CGRectContainsPoint(second, p) && !(table & TableMarks2)  && gameOver==0) {
             turnCount++;
         self.myRect = second;
         if(!(table & TableMarks2)) {
             [self setNeedsDisplayInRect:second];
-            if(turn){
+            x=1;
                 x=x<<2;
-                table = table|x;
-            }else {
-                o=o<<2;
-                table = table|o;
-            }
+            table = table |x;
+            turn = false;
         }
         
-    } else if (CGRectContainsPoint(third, p) && !(table & TableMarks3)) {
+    } else if (CGRectContainsPoint(third, p) && !(table & TableMarks3) && gameOver==0) {
             turnCount++;
             self.myRect = third;
         if(!(table & TableMarks3)) {
             [self setNeedsDisplayInRect:third];
-            if(turn){
+                x=1;
                 x=x<<4;
                 table = table|x;
-            }else {
-                o=o<<4;
-                table = table|o;
-            }
+            turn = false;
         }
-    } else if (CGRectContainsPoint(fourth, p) && !(table & TableMarks4)) {
+    } else if (CGRectContainsPoint(fourth, p) && !(table & TableMarks4) && gameOver==0) {
             turnCount++;
             self.myRect = fourth;
         if(!(table & TableMarks4)) {
         [self setNeedsDisplayInRect:fourth];
-            if(turn){
+                x=1;
                 x=x<<6;
                 table = table|x;
-            }else {
-                o=o<<6;
-                table = table|o;
-            }
+            turn = false;
+
         }
-    } else if (CGRectContainsPoint(fifth, p) && !(table & TableMarks5)) {
+    } else if (CGRectContainsPoint(fifth, p) && !(table & TableMarks5) && gameOver==0) {
             turnCount++;
             self.myRect = fifth;
         if (!(table & TableMarks5)) {
         
            [self setNeedsDisplayInRect:fifth];
-            if(turn){
-                x=x<<8;
+
+            x=1;
+            x=x<<8;
                 table = table|x;
-            }else {
-                o=o<<8;
-                table = table|o;
-            }
+            turn = false;
+
         }
-    } else if (CGRectContainsPoint(sixth, p) && !(table & TableMarks6)) {
+    } else if (CGRectContainsPoint(sixth, p) && !(table & TableMarks6) && gameOver==0) {
         turnCount++;
             self.myRect = sixth;
         if(!(table & TableMarks6)) {
             [self setNeedsDisplayInRect:sixth];
-            if(turn){
-                x=x<<10;
+            x=1;
+            x=x<<10;
                 table = table|x;
-            }else {
-                o=o<<10;
-                table = table|o;
-                }
+            turn = false;
         }
-    } else if (CGRectContainsPoint(seventh, p) && !(table & TableMarks7)) {
+    } else if (CGRectContainsPoint(seventh, p) && !(table & TableMarks7) && gameOver==0) {
             turnCount++;
             self.myRect = seventh;
         if(!(table & TableMarks7)) {
             [self setNeedsDisplayInRect:seventh];
-            if(turn){
-                x=x<<12;
+
+            x=1;
+            x=x<<12;
                 table = table|x;
-            }else {
-                o=o<<12;
-                table = table|o;
-            }
+            turn = false;
+
         }
-    } else if (CGRectContainsPoint(eight, p) && !(table & TableMarks8)) {
+    } else if (CGRectContainsPoint(eight, p) && !(table & TableMarks8) && gameOver==0) {
             turnCount++;
             self.myRect = eight;
         if(!(table & TableMarks8)) {
             [self setNeedsDisplayInRect:eight];
-            if(turn){
-                x=x<<14;
+            x=1;
+            x=x<<14;
                 table = table|x;
-            }else {
-                o=o<<14;
-                table = table|o;
-            }
+            turn = false;
         }
-    } else if (CGRectContainsPoint(nineth, p) && !(table & TableMarks9)) {
+    } else if (CGRectContainsPoint(nineth, p) && !(table & TableMarks9) && gameOver==0) {
             turnCount++;
             self.myRect = nineth;
         if(!(table & TableMarks9)){
             [self setNeedsDisplayInRect:nineth];
-            if(turn){
-                x=x<<16;
+            x=1;
+            x=x<<16;
                 table = table|x;
-            }else {
-                o=o<<16;
-                table = table|o;
-            }
+            turn = false;
         }
     }
+    
+    // Display winner's rect
+    
+    if ((table & TableMarks1) && (table & TableMarks2) && (table & TableMarks3) && gameOver==0) {
+        if((table & OMarks1) && (table & OMarks2) && (table & OMarks3)) {
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        } else if(!(table & OMarks1) && !(table & OMarks2) && !(table & OMarks3)) {
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        }
+    }
+    
+    if ((table & TableMarks4) && (table & TableMarks5) && (table & TableMarks6) && gameOver==0) {
+        if((table & OMarks4) && (table & OMarks5) && (table & OMarks6)) {
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        }
+        else if(!(table & OMarks4) && !(table & OMarks5) && !(table & OMarks6)) {
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        }
+    }
+    if ((table & TableMarks7) && (table & TableMarks8) && (table & TableMarks9) && gameOver==0) {
+        if ((table & OMarks7) && (table & OMarks8) && (table & OMarks9)) {
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        }
+        else if (!(table & OMarks7) && !(table & OMarks8) && !(table & OMarks9)){
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        }
+    }
+    if ((table & TableMarks1) && (table & TableMarks4) && (table & TableMarks7) && gameOver==0) {
+        if((table & OMarks1) && (table & OMarks4) && (table & OMarks7)) {
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        }
+        else if(!(table & OMarks1) && !(table & OMarks4) && !(table & OMarks7)) {
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        }
+    }
+    if ((table & TableMarks2) && (table & TableMarks5) && (table & TableMarks8) && gameOver==0) {
+        if ((table & OMarks2) && (table & OMarks5) && (table & OMarks8)) {
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        }
+        else  if (!(table & OMarks2) && !(table & OMarks5) && !(table & OMarks8)){
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        }
+    }
+    if ((table & TableMarks3) && (table & TableMarks6) && (table & TableMarks9) && gameOver==0) {
+        if((table & OMarks3) && (table & OMarks6) && (table & OMarks9)){
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        }
+        else if(!(table & OMarks3) && !(table & OMarks6) && !(table & OMarks9)){
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        }
+    }
+    if ((table & TableMarks1) && (table & TableMarks5) && (table & TableMarks9) && gameOver==0) {
+        if ((table & OMarks1) && (table & OMarks5) && (table & OMarks9)){
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        }
+        else  if (!(table & OMarks1) && !(table & OMarks5) && !(table & OMarks9)){
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        }
+    }
+    if ((table & TableMarks3) && (table & TableMarks5) && (table & TableMarks7) && gameOver==0) {
+        if ((table & OMarks3) && (table & OMarks5) && (table & OMarks7)) {
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        }
+        else  if (!(table & OMarks3) && !(table & OMarks5) && !(table & OMarks7)) {
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        }
+    }
+    
+    if(turn==false){
+        // O chanses to win horizontaly
+        
+        if ((table & TableMarks1) && (table & TableMarks2) && (table & OMarks1) && (table & OMarks2) && !(table & TableMarks3) && gameOver==0) {
+            self.AI = third;
+            o=3;
+            o=o<<4;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks1) && (table & TableMarks3) && (table & OMarks1) && (table & OMarks3) && !(table & TableMarks2) && gameOver==0) {
+            self.AI = second;
+            o=3;
+            o=o<<2;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks2) && (table & TableMarks3) && (table & OMarks2) && (table & OMarks3) && !(table & TableMarks1) && gameOver==0) {
+            self.AI = first;
+            o=3;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks4) && (table & TableMarks5) && (table & OMarks4) && (table & OMarks5) && !(table & TableMarks6) && gameOver==0) {
+            self.AI = sixth;
+            o=3;
+            o=o<<10;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks5) && (table & TableMarks6) && (table & OMarks5) && (table & OMarks6) && !(table & TableMarks4) && gameOver==0) {
+            self.AI = fourth;
+            o=3;
+            o=o<<6;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks4) && (table & TableMarks6) && (table & OMarks4) && (table & OMarks6) && !(table & TableMarks5) && gameOver==0) {
+            self.AI = fifth;
+            o=3;
+            o=o<<8;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks7) && (table & TableMarks8) && (table & OMarks7) && (table & OMarks8) && !(table & TableMarks9) && gameOver==0) {
+            self.AI = nineth;
+            o=3;
+            o=o<<16;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks8) && (table & TableMarks9) && (table & OMarks8) && (table & OMarks9) && !(table & TableMarks7) && gameOver==0) {
+            self.AI = seventh;
+            o=3;
+            o=o<<12;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks7) && (table & TableMarks9) && (table & OMarks7) && (table & OMarks9) && !(table & TableMarks8) && gameOver==0) {
+            self.AI = eight;
+            o=3;
+            o=o<<14;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        //O chances to win verticaly
+        
+        else if ((table & TableMarks1) && (table & TableMarks4) && (table & OMarks1) && (table & OMarks4) && !(table & TableMarks7) && gameOver==0) {
+            self.AI = seventh;
+            o=3;
+            o=o<<12;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks4) && (table & TableMarks7) && (table & OMarks4) && (table & OMarks7) && !(table & TableMarks1) && gameOver==0) {
+            self.AI = first;
+            o=3;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks1) && (table & TableMarks7) && (table & OMarks1) && (table & OMarks7) && !(table & TableMarks4) && gameOver==0) {
+            self.AI = fourth;
+            o=3;
+            o=o<<6;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks2) && (table & TableMarks5) && (table & OMarks2) && (table & OMarks5) && !(table & TableMarks8) && gameOver==0) {
+            self.AI = eight;
+            o=3;
+            o=o<<14;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks5) && (table & TableMarks8) && (table & OMarks5) && (table & OMarks8) && !(table & TableMarks2) && gameOver==0) {
+            self.AI = second;
+            o=3;
+            o=o<<2;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks2) && (table & TableMarks8) && (table & OMarks2) && (table & OMarks8) && !(table & TableMarks5) && gameOver==0) {
+            self.AI = fifth;
+            o=3;
+            o=o<<8;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks3) && (table & TableMarks6) && (table & OMarks3) && (table & OMarks6) && !(table & TableMarks9) && gameOver==0) {
+            self.AI = nineth;
+            o=3;
+            o=o<<16;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks6) && (table & TableMarks9) && (table & OMarks6) && (table & OMarks9) && !(table & TableMarks3) && gameOver==0) {
+            self.AI = third;
+            o=3;
+            o=o<<4;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks3) && (table & TableMarks9) && (table & OMarks3) && (table & OMarks9) && !(table & TableMarks6) && gameOver==0) {
+            self.AI = sixth;
+            o=3;
+            o=o<<10;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        
+        //O chances to win diagonaly
+        
+        else if ((table & TableMarks1) && (table & TableMarks5) && (table & OMarks1) && (table & OMarks5) && !(table & TableMarks9) && gameOver==0) {
+            self.AI = nineth;
+            o=3;
+            o=o<<16;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks5) && (table & TableMarks9) && (table & OMarks5) && (table & OMarks9) && !(table & TableMarks1) && gameOver==0) {
+            self.AI = first;
+            o=3;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks1) && (table & TableMarks9) && (table & OMarks1) && (table & OMarks9) && !(table & TableMarks5) && gameOver==0) {
+            self.AI = fifth;
+            o=3;
+            o=o<<8;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks3) && (table & TableMarks5) && (table & OMarks3) && (table & OMarks5) && !(table & TableMarks7) && gameOver==0) {
+            self.AI = seventh;
+            o=3;
+            o=o<<12;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks5) && (table & TableMarks7) && (table & OMarks5) && (table & OMarks7) && !(table & TableMarks3) && gameOver==0) {
+            self.AI = third;
+            o=3;
+            o=o<<4;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+        else if ((table & TableMarks3) && (table & TableMarks7) && (table & OMarks3) && (table & OMarks7) && !(table & TableMarks5) && gameOver==0) {
+            self.AI = fifth;
+            o=3;
+            o=o<<8;
+            table = table|o;
+            [self setNeedsDisplayInRect:self.AI];
+        }
+    
+     // Where to put O? horizontaly
+    else if ((table & TableMarks1) && (table & TableMarks2) && !(table & OMarks1) && !(table & OMarks2) && gameOver==0 && !(table &TableMarks3) && gameOver==0) {
+        self.AI = third;
+        o=3;
+        o=o<<4;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    
+    else if ((table & TableMarks2) && (table & TableMarks3) && !(table & OMarks2) && !(table & OMarks3) && gameOver==0 && !(table &TableMarks1) && gameOver==0)  {
+        self.AI = first;
+        o=3;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks1) && (table & TableMarks3) && !(table & OMarks1) && !(table & OMarks3) && gameOver==0 && !(table &TableMarks2) && gameOver==0)  {
+        self.AI = second;
+        o=3;
+        o=o<<2;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks4) && (table & TableMarks5) && !(table & OMarks4) && !(table & OMarks5) && gameOver==0 && !(table &TableMarks6) && gameOver==0) {
+        self.AI = sixth;
+        o=3;
+        o=o<<10;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks5) && (table & TableMarks6) && !(table & OMarks5) && !(table & OMarks6) && gameOver==0 && !(table &TableMarks4) && gameOver==0) {
+        self.AI = fourth;
+        o=3;
+        o=o<<6;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks4) && (table & TableMarks6) && !(table & OMarks4) && !(table & OMarks6) && gameOver==0 && !(table &TableMarks5) && gameOver==0) {
+        self.AI = fifth;
+        o=3;
+        o=o<<8;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks7) && (table & TableMarks8) && !(table & OMarks7) && !(table & OMarks8) && gameOver==0 && !(table &TableMarks9) && gameOver==0) {
+        self.AI = nineth;
+        o=3;
+        o=o<<16;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks8) && (table & TableMarks9) && !(table & OMarks8) && !(table & OMarks9) && gameOver==0 && !(table &TableMarks7) && gameOver==0) {
+        self.AI = seventh;
+        o=3;
+        o=o<<12;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks7) && (table & TableMarks9) && !(table & OMarks7) && !(table & OMarks9) && gameOver==0 && !(table &TableMarks8) && gameOver==0) {
+        self.AI = eight;
+        o=3;
+        o=o<<14;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    
+    // verticaly
+    
+    else if ((table & TableMarks1) && (table & TableMarks4) && !(table & OMarks1) && !(table & OMarks4) && gameOver==0 && !(table &TableMarks7) && gameOver==0) {
+        self.AI = seventh;
+        o=3;
+        o=o<<12;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    
+    else if ((table & TableMarks4) && (table & TableMarks7) && !(table & OMarks4) && !(table & OMarks7) && gameOver==0 && !(table &TableMarks1) && gameOver==0)  {
+        self.AI = first;
+        o=3;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks1) && (table & TableMarks7) && !(table & OMarks1) && !(table & OMarks7) && gameOver==0 && !(table &TableMarks4) && gameOver==0)  {
+        self.AI = fourth;
+        o=3;
+        o=o<<6;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks2) && (table & TableMarks5) && !(table & OMarks2) && !(table & OMarks5) && gameOver==0 && !(table &TableMarks8) && gameOver==0) {
+        self.AI = eight;
+        o=3;
+        o=o<<14;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks5) && (table & TableMarks8) && !(table & OMarks5) && !(table & OMarks8) && gameOver==0 && !(table &TableMarks2) && gameOver==0) {
+        self.AI = second;
+        o=3;
+        o=o<<2;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks2) && (table & TableMarks8) && !(table & OMarks2) && !(table & OMarks8) && gameOver==0 && !(table &TableMarks5) && gameOver==0) {
+        self.AI = fifth;
+        o=3;
+        o=o<<8;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks3) && (table & TableMarks6) && !(table & OMarks3) && !(table & OMarks6) && gameOver==0 && !(table &TableMarks9) && gameOver==0) {
+        self.AI = nineth;
+        o=3;
+        o=o<<16;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks6) && (table & TableMarks9) && !(table & OMarks6) && !(table & OMarks9) && gameOver==0 && !(table &TableMarks3) && gameOver==0) {
+        self.AI = third;
+        o=3;
+        o=o<<4;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks3) && (table & TableMarks9) && !(table & OMarks3) && !(table & OMarks9) && gameOver==0 && !(table &TableMarks6) && gameOver==0) {
+        self.AI = sixth;
+        o=3;
+        o=o<<10;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    // diagonaly
+    else if ((table & TableMarks1) && (table & TableMarks5) && !(table & OMarks1) && !(table & OMarks5) && gameOver==0 && !(table &TableMarks9) && gameOver==0) {
+        self.AI = nineth;
+        o=3;
+        o=o<<16;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks5) && (table & TableMarks9) && !(table & OMarks5) && !(table & OMarks9) && gameOver==0 && !(table &TableMarks1) && gameOver==0) {
+        self.AI = first;
+        o=3;
+        
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks1) && (table & TableMarks9) && !(table & OMarks1) && !(table & OMarks9) && gameOver==0 && !(table &TableMarks5) && gameOver==0) {
+        self.AI = fifth;
+        o=3;
+        o=o<<8;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks3) && (table & TableMarks5) && !(table & OMarks3) && !(table & OMarks5) && gameOver==0 && !(table &TableMarks7) && gameOver==0) {
+        self.AI = seventh;
+        o=3;
+        o=o<<12;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks5) && (table & TableMarks7) && !(table & OMarks5) && !(table & OMarks7) && gameOver==0 && !(table &TableMarks3) && gameOver==0) {
+        self.AI = third;
+        o=3;
+        o=o<<4;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if ((table & TableMarks3) && (table & TableMarks7) && !(table & OMarks3) && !(table & OMarks7) && gameOver==0 && !(table &TableMarks5) && gameOver==0) {
+        self.AI = fifth;
+        o=3;
+        o=o<<8;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+        //singles
+        
+    else if(!(table & TableMarks5) && gameOver==0) {
+        self.AI = fifth;
+        o=3;
+        o=o<<8;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if(!(table & TableMarks2) && gameOver==0) {
+        self.AI = second;
+        o=3;
+        o=o<<2;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if(!(table & TableMarks3) && gameOver==0) {
+        self.AI = third;
+        o=3;
+        o=o<<4;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if(!(table & TableMarks4) && gameOver==0) {
+        self.AI = fourth;
+        o=3;
+        o=o<<6;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if(!(table & TableMarks1) && gameOver==0) {
+        self.AI = first;
+        o=3;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if(!(table & TableMarks6) && gameOver==0) {
+        self.AI = sixth;
+        o=3;
+        o=o<<10;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if(!(table & TableMarks7) && gameOver==0) {
+        self.AI = seventh;
+        o=3;
+        o=o<<12;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if(!(table & TableMarks8) && gameOver==0) {
+        self.AI = eight;
+        o=3;
+        o=o<<14;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+    else if(!(table & TableMarks9) && gameOver==0) {
+        self.AI = nineth;
+        o=3;
+        o=o<<16;
+        table = table|o;
+        [self setNeedsDisplayInRect:self.AI];
+    }
+        
+    }
+    
+    // Is it TIE?
     if(turnCount == 9) {
         
         [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
         
     }
-    if ((table & TableMarks1) && (table & TableMarks2) && (table & TableMarks3)) {
+    // Display winner's rect
+    
+    if ((table & TableMarks1) && (table & TableMarks2) && (table & TableMarks3) && gameOver==0) {
         if((table & OMarks1) && (table & OMarks2) && (table & OMarks3)) {
             [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
-        } else if(!(table & OMarks1) && !(table & OMarks2) && !(table & OMarks3))
+            gameOver=1;
+        } else if(!(table & OMarks1) && !(table & OMarks2) && !(table & OMarks3)) {
             [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
-        
+            gameOver=1;
+        }
     }
-    if ((table & TableMarks4) && (table & TableMarks5) && (table & TableMarks6)) {
-         if((table & OMarks4) && (table & OMarks5) && (table & OMarks6))
-             [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
-         else if(!(table & OMarks4) && !(table & OMarks5) && !(table & OMarks6))
-             [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
-        
+    
+    if ((table & TableMarks4) && (table & TableMarks5) && (table & TableMarks6) && gameOver==0) {
+        if((table & OMarks4) && (table & OMarks5) && (table & OMarks6)) {
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        }
+        else if(!(table & OMarks4) && !(table & OMarks5) && !(table & OMarks6)) {
+            [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        }
     }
-    if ((table & TableMarks7) && (table & TableMarks8) && (table & TableMarks9)) {
-        if ((table & OMarks7) && (table & OMarks8) && (table & OMarks9))
+    if ((table & TableMarks7) && (table & TableMarks8) && (table & TableMarks9) && gameOver==0) {
+        if ((table & OMarks7) && (table & OMarks8) && (table & OMarks9)) {
             [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
-        else if (!(table & OMarks7) && !(table & OMarks8) && !(table & OMarks9))
+            gameOver=1;
+        }
+        else if (!(table & OMarks7) && !(table & OMarks8) && !(table & OMarks9)){
             [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
-        
+            gameOver=1;
+        }
     }
-    if ((table & TableMarks1) && (table & TableMarks4) && (table & TableMarks7)) {
-        if((table & OMarks1) && (table & OMarks4) && (table & OMarks7))
+    if ((table & TableMarks1) && (table & TableMarks4) && (table & TableMarks7) && gameOver==0) {
+        if((table & OMarks1) && (table & OMarks4) && (table & OMarks7)) {
             [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
-        else if(!(table & OMarks1) && !(table & OMarks4) && !(table & OMarks7))
+            gameOver=1;
+        }
+        else if(!(table & OMarks1) && !(table & OMarks4) && !(table & OMarks7)) {
             [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
-            
+            gameOver=1;
+        }
     }
-    if ((table & TableMarks2) && (table & TableMarks5) && (table & TableMarks8)) {
-        if ((table & OMarks2) && (table & OMarks5) && (table & OMarks8))
+    if ((table & TableMarks2) && (table & TableMarks5) && (table & TableMarks8) && gameOver==0) {
+        if ((table & OMarks2) && (table & OMarks5) && (table & OMarks8)) {
             [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
-        else  if (!(table & OMarks2) && !(table & OMarks5) && !(table & OMarks8))
+            gameOver=1;
+        }
+        else  if (!(table & OMarks2) && !(table & OMarks5) && !(table & OMarks8)){
             [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
-        
+            gameOver=1;
+        }
     }
-    if ((table & TableMarks3) && (table & TableMarks6) && (table & TableMarks9)) {
-        if((table & OMarks3) && (table & OMarks6) && (table & OMarks9))
+    if ((table & TableMarks3) && (table & TableMarks6) && (table & TableMarks9) && gameOver==0) {
+        if((table & OMarks3) && (table & OMarks6) && (table & OMarks9)){
             [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
-        else if(!(table & OMarks3) && !(table & OMarks6) && !(table & OMarks9))
+            gameOver=1;
+        }
+        else if(!(table & OMarks3) && !(table & OMarks6) && !(table & OMarks9)){
             [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
-        
+            gameOver=1;
+        }
     }
-    if ((table & TableMarks1) && (table & TableMarks5) && (table & TableMarks9)) {
-        if ((table & OMarks1) && (table & OMarks5) && (table & OMarks9))
+    if ((table & TableMarks1) && (table & TableMarks5) && (table & TableMarks9) && gameOver==0) {
+        if ((table & OMarks1) && (table & OMarks5) && (table & OMarks9)){
             [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
-        else  if (!(table & OMarks1) && !(table & OMarks5) && !(table & OMarks9))
+            gameOver=1;
+        }
+        else  if (!(table & OMarks1) && !(table & OMarks5) && !(table & OMarks9)){
             [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
-        
+            gameOver=1;
+        }
     }
-    if ((table & TableMarks3) && (table & TableMarks5) && (table & TableMarks7)) {
-        if ((table & OMarks3) && (table & OMarks5) && (table & OMarks7))
+    if ((table & TableMarks3) && (table & TableMarks5) && (table & TableMarks7) && gameOver==0) {
+        if ((table & OMarks3) && (table & OMarks5) && (table & OMarks7)) {
             [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
-        else  if (!(table & OMarks3) && !(table & OMarks5) && !(table & OMarks7))
+            gameOver=1;
+        }
+        else  if (!(table & OMarks3) && !(table & OMarks5) && !(table & OMarks7)) {
             [self setNeedsDisplayInRect:CGRectMake(self.bounds.size.width*1/3,self.bounds.size.height*4/6,200,200)];
+            gameOver=1;
+        }
     }
+    
 }
-
  // background Gradinet
 void drawLinearGradient(CGContextRef context, CGRect rect, CGColorRef startColor, CGColorRef endColor)
 {
@@ -575,6 +1142,5 @@ typedef NS_OPTIONS(int, OMarks) {
     OMarks8 = 1 << 15,
     OMarks9 = 1 << 17,
 };
-
 
 @end
