@@ -7,8 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "CustomBackground.h"
-#import "Xview.h"
+
+
 @interface ViewController ()
 
 @end
@@ -18,9 +18,6 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self.gameView action:@selector(add:)];
-        [self.gameView addGestureRecognizer: tap];
     
 }
 @end
