@@ -68,39 +68,22 @@
     }
     
     if (self.myRect.origin.x == 0.1 && self.myRect.origin.y == 0.1) {
-        table = table|x;
         [self drawXwithContext:context];
     } else if (self.myRect.origin.x == self.bounds.size.width * 1/3 && self.myRect.origin.y == 0 ) {
-        x = x<<2;
-        table = table|x;
         [self drawXwithContext:context];
     } else if (self.myRect.origin.x == self.bounds.size.width * 2/3 && self.myRect.origin.y == 0) {
-        x = x<<4;
-        table = table|x;
         [self drawXwithContext:context];
     } else if (self.myRect.origin.x == 0 && self.myRect.origin.y == self.bounds.size.height * 1/6) {
-        x = x<<6;
-        table = table|x;
         [self drawXwithContext:context];
     } else if (self.myRect.origin.x == self.bounds.size.width * 1/3 && self.myRect.origin.y == self.bounds.size.height * 1/6) {
-        x = x<<8;
-        table = table|x;
         [self drawXwithContext:context];
     } else if (self.myRect.origin.x == self.bounds.size.width * 2/3 && self.myRect.origin.y == self.bounds.size.height * 1/6) {
-        x = x<<10;
-        table = table|x;
         [self drawXwithContext:context];
     } else if (self.myRect.origin.x == 0 && self.myRect.origin.y == self.bounds.size.height * 2/6) {
-        x = x<<12;
-        table = table|x;
         [self drawXwithContext:context];
     } else if (self.myRect.origin.x == self.bounds.size.width * 1/3 && self.myRect.origin.y == self.bounds.size.height * 2/6) {
-        x = x<<14;
-        table = table|x;
         [self drawXwithContext:context];
     } else if (self.myRect.origin.x == self.bounds.size.width * 2/3 && self.myRect.origin.y == self.bounds.size.height * 2/6) {
-        x = x<<16;
-        table = table|x;
         [self drawXwithContext:context];
     }
     
